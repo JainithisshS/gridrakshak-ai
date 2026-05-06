@@ -33,16 +33,16 @@ st.markdown("""
 
 html, body, [class*="css"] { 
     font-family: 'Poppins', sans-serif;
-    background: #0d1117;
-    color: #e5e7eb;
+    background: #0a0a0a;
+    color: #e8e8e8;
 }
 
-.main { background: #0d1117; }
+.main { background: #0a0a0a; }
 [data-testid="stSidebar"] { 
-    background: #161b22; 
-    border-right: 1px solid #30363d; 
+    background: #121212; 
+    border-right: 1px solid #2a2a2a; 
 }
-[data-testid="stSidebar"] * { color: #d0d6dc !important; }
+[data-testid="stSidebar"] * { color: #d8d8d8 !important; }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 { 
@@ -52,8 +52,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Metric Cards */
 .metric-card {
-    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
-    border: 1px solid #30363d;
+    background: #121212;
+    border: 1px solid #2a2a2a;
     border-radius: 10px;
     padding: 24px;
     text-align: center;
@@ -61,19 +61,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 .metric-card:hover { 
     transform: translateY(-2px); 
-    border-color: #58a6ff;
-    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.08);
+    border-color: #10b981;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
 }
 .metric-value { 
     font-size: 2.4rem; 
     font-weight: 800; 
-    color: #58a6ff; 
+    color: #10b981; 
     margin: 8px 0 4px 0;
     letter-spacing: -0.5px;
 }
 .metric-label { 
     font-size: 0.8rem; 
-    color: #8b949e; 
+    color: #9a9a9a; 
     text-transform: uppercase; 
     letter-spacing: 0.08em;
     font-weight: 600;
@@ -81,39 +81,39 @@ h1, h2, h3, h4, h5, h6 {
 .metric-delta { 
     font-size: 0.75rem; 
     margin-top: 6px; 
-    color: #8b949e;
+    color: #9a9a9a;
     font-weight: 500;
 }
 
-/* Status Colors - Monochrome */
-.risk-high { color: #dc3545 !important; font-weight: 700; }
-.risk-medium { color: #6f42c1 !important; font-weight: 700; }
-.risk-low { color: #198754 !important; font-weight: 700; }
+/* Status Colors - Professional */
+.risk-high { color: #ef4444 !important; font-weight: 700; }
+.risk-medium { color: #f59e0b !important; font-weight: 700; }
+.risk-low { color: #10b981 !important; font-weight: 700; }
 
 /* Alert Cards */
 .alert-card {
-    background: #161b22;
-    border-left: 3px solid #58a6ff;
+    background: #121212;
+    border-left: 3px solid #10b981;
     border-radius: 8px;
     padding: 18px 20px;
     margin-bottom: 12px;
     transition: all 0.2s ease;
 }
 .alert-card:hover { 
-    border-left-color: #79c0ff;
-    background: #1c2128;
+    border-left-color: #34d399;
+    background: #1a1a1a;
 }
-.alert-card.medium { border-left-color: #6f42c1; }
-.alert-card.low { border-left-color: #198754; }
+.alert-card.medium { border-left-color: #f59e0b; }
+.alert-card.low { border-left-color: #10b981; }
 .alert-meter { 
     font-size: 1rem; 
     font-weight: 700; 
-    color: #d0d6dc;
+    color: #d8d8d8;
     letter-spacing: -0.3px;
 }
 .alert-reason { 
     font-size: 0.8rem; 
-    color: #8b949e; 
+    color: #9a9a9a; 
     margin-top: 6px; 
     font-weight: 500;
 }
@@ -122,8 +122,8 @@ h1, h2, h3, h4, h5, h6 {
 .section-header {
     font-size: 1.3rem; 
     font-weight: 800; 
-    color: #e5e7eb;
-    border-bottom: 2px solid #30363d;
+    color: #e8e8e8;
+    border-bottom: 2px solid #2a2a2a;
     padding-bottom: 12px; 
     margin-bottom: 24px;
     letter-spacing: -0.4px;
@@ -131,20 +131,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Tables */
 [data-testid="stDataFrame"] { 
-    background: #0d1117 !important;
+    background: #0a0a0a !important;
     border-radius: 8px; 
-    border: 1px solid #30363d;
+    border: 1px solid #2a2a2a;
 }
 
 /* Tabs */
 .stTabs [data-baseweb="tab-list"] { 
     background: transparent;
-    border-bottom: 2px solid #30363d;
+    border-bottom: 2px solid #2a2a2a;
     gap: 8px;
 }
 .stTabs [data-baseweb="tab"] { 
     background: transparent;
-    color: #8b949e;
+    color: #9a9a9a;
     border-radius: 6px 6px 0 0;
     font-weight: 600;
     border: none;
@@ -152,14 +152,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .stTabs [aria-selected="true"] { 
     background: transparent;
-    color: #58a6ff !important; 
-    border-bottom: 3px solid #58a6ff;
+    color: #10b981 !important; 
+    border-bottom: 3px solid #10b981;
     font-weight: 700;
 }
 
 /* Buttons */
 .stButton > button {
-    background: #238636 !important;
+    background: #10b981 !important;
     color: white !important;
     border: none !important;
     font-weight: 700 !important;
@@ -168,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s ease !important;
 }
 .stButton > button:hover {
-    background: #2ea043 !important;
+    background: #059669 !important;
     transform: translateY(-1px) !important;
 }
 
@@ -176,51 +176,51 @@ h1, h2, h3, h4, h5, h6 {
 .stTextInput > div > div > input,
 .stNumberInput > div > div > input,
 .stSelectbox > div > div > select {
-    background: #0d1117 !important;
-    border: 1px solid #30363d !important;
-    color: #e5e7eb !important;
+    background: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
+    color: #e8e8e8 !important;
     border-radius: 6px !important;
     font-weight: 500 !important;
 }
 
 .stSelectbox > div > div > select option {
-    background: #161b22 !important;
-    color: #e5e7eb !important;
+    background: #121212 !important;
+    color: #e8e8e8 !important;
 }
 
 /* Info/Warning/Error boxes */
 .stInfo, [data-testid="stInformationBox"] {
-    background: #0d2d1a !important;
-    border-left: 4px solid #198754 !important;
+    background: #0d2817 !important;
+    border-left: 4px solid #10b981 !important;
     border-radius: 6px !important;
     padding: 12px 16px !important;
 }
 
 .stWarning {
-    background: #2d2b0d !important;
-    border-left: 4px solid #6f42c1 !important;
+    background: #2d2a0d !important;
+    border-left: 4px solid #f59e0b !important;
     border-radius: 6px !important;
     padding: 12px 16px !important;
 }
 
 .stError {
     background: #2d0d0d !important;
-    border-left: 4px solid #dc3545 !important;
+    border-left: 4px solid #ef4444 !important;
     border-radius: 6px !important;
     padding: 12px 16px !important;
 }
 
 .stSuccess {
-    background: #0d2d1a !important;
-    border-left: 4px solid #198754 !important;
+    background: #0d2817 !important;
+    border-left: 4px solid #10b981 !important;
     border-radius: 6px !important;
     padding: 12px 16px !important;
 }
 
 /* Selectbox/Multiselect */
 .stMultiSelect > div > div {
-    background: #0d1117 !important;
-    border: 1px solid #30363d !important;
+    background: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
     border-radius: 6px !important;
 }
 </style>
@@ -292,6 +292,10 @@ def check_outputs():
     return all(p.exists() for p in required)
 
 
+# ── Sidebar Toggle State ────────────────────────────────────────────────────────
+if "sidebar_open" not in st.session_state:
+    st.session_state.sidebar_open = True
+
 # ── Sidebar ─────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### GridRakshak AI")
@@ -335,6 +339,24 @@ with st.sidebar:
     st.caption("Built with LightGBM, SHAP, DTW")
     st.caption("BESCOM Pilot - v2.0")
 
+# ── Sidebar Hide CSS ────────────────────────────────────────────────────────────
+if not st.session_state.sidebar_open:
+    st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {
+        display: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# ── Show Sidebar Toggle (when hidden) ───────────────────────────────────────────
+if not st.session_state.sidebar_open:
+    col1, col2 = st.columns([20, 1])
+    with col2:
+        if st.button("☰", help="Show sidebar", key="show_sidebar"):
+            st.session_state.sidebar_open = True
+            st.rerun()
 
 # ── Main Content ─────────────────────────────────────────────────────────────────
 st.markdown("# GridRakshak AI")
@@ -444,7 +466,7 @@ with tab1:
 
         with c1:
             # Risk tier bar chart
-            color_map = {"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"}
+            color_map = {"High": "#ef4444", "Medium": "#f59e0b", "Low": "#10b981"}
             fig = px.bar(
                 zone_risk,
                 x="zone_name", y="capacity_usage_pct",
@@ -455,14 +477,14 @@ with tab1:
                 title="Zone Capacity Usage & Risk Tier",
             )
             fig.update_traces(textposition="outside", textfont_size=13)
-            fig.add_hline(y=85, line_dash="dash", line_color="#dc3545",
+            fig.add_hline(y=85, line_dash="dash", line_color="#ef4444",
                          annotation_text="High Risk Threshold (85%)")
             fig.update_layout(
-                paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-                font_color="#d0d6dc", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d0d6dc"),
-                xaxis=dict(gridcolor="#30363d"),
-                yaxis=dict(gridcolor="#30363d"),
-                legend=dict(bgcolor="#161b22"),
+                paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+                font_color="#d8d8d8", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d8d8d8"),
+                xaxis=dict(gridcolor="#2a2a2a"),
+                yaxis=dict(gridcolor="#2a2a2a"),
+                legend=dict(bgcolor="#121212"),
                 margin=dict(t=60, b=20),
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -478,11 +500,11 @@ with tab1:
                 title="Demand Exceedance Probability",
             )
             fig2.update_layout(
-                paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-                font_color="#d0d6dc", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d0d6dc"),
-                xaxis=dict(gridcolor="#30363d"),
-                yaxis=dict(gridcolor="#30363d"),
-                legend=dict(bgcolor="#161b22"),
+                paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+                font_color="#d8d8d8", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d8d8d8"),
+                xaxis=dict(gridcolor="#2a2a2a"),
+                yaxis=dict(gridcolor="#2a2a2a"),
+                legend=dict(bgcolor="#121212"),
                 margin=dict(t=60, b=20),
             )
             st.plotly_chart(fig2, use_container_width=True)
@@ -509,25 +531,25 @@ with tab1:
         fig3 = go.Figure()
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["actual_kwh"],
-            name="Actual", line=dict(color="#58a6ff", width=2.5),
+            name="Actual", line=dict(color="#10b981", width=2.5),
         ))
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["forecast_kwh"],
-            name="Forecast (P50)", line=dict(color="#79c0ff", width=2, dash="dash"),
+            name="Forecast (P50)", line=dict(color="#34d399", width=2, dash="dash"),
         ))
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["forecast_p90_kwh"],
-            name="Forecast (P90)", line=dict(color="#a5d6ff", width=1.5, dash="dot"),
+            name="Forecast (P90)", line=dict(color="#6ee7b7", width=1.5, dash="dot"),
         ))
         cap = z_fc["capacity_kw"].iloc[0]
-        fig3.add_hline(y=cap, line_dash="dash", line_color="#dc3545",
+        fig3.add_hline(y=cap, line_dash="dash", line_color="#ef4444",
                       annotation_text=f"Capacity: {cap} kW")
         fig3.update_layout(
-            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-            xaxis=dict(gridcolor="#30363d", title="Time"),
-            yaxis=dict(gridcolor="#30363d", title="kWh"),
-            legend=dict(bgcolor="#161b22"),
+            paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+            font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+            xaxis=dict(gridcolor="#2a2a2a", title="Time"),
+            yaxis=dict(gridcolor="#2a2a2a", title="kWh"),
+            legend=dict(bgcolor="#121212"),
             margin=dict(t=20, b=20),
         )
         st.plotly_chart(fig3, use_container_width=True)
@@ -576,15 +598,15 @@ with tab2:
         # Risk score distribution
         fig4 = px.histogram(
             alerts, x="risk_score", color="alert_tier",
-            color_discrete_map={"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"},
+            color_discrete_map={"High": "#ef4444", "Medium": "#f59e0b", "Low": "#10b981"},
             nbins=30, title="Risk Score Distribution",
             labels={"risk_score": "Composite Risk Score", "count": "Number of Meters"},
         )
         fig4.update_layout(
-            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-            xaxis=dict(gridcolor="#30363d"),
-            yaxis=dict(gridcolor="#30363d"), legend=dict(bgcolor="#161b22"),
+            paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+            font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+            xaxis=dict(gridcolor="#2a2a2a"),
+            yaxis=dict(gridcolor="#2a2a2a"), legend=dict(bgcolor="#121212"),
         )
         st.plotly_chart(fig4, use_container_width=True)
 
@@ -625,7 +647,7 @@ with tab3:
         fig5 = go.Figure()
         fig5.add_trace(go.Scatter(
             x=m_readings["timestamp"], y=m_readings["kwh"],
-            name="kWh Reading", line=dict(color="#58a6ff", width=2),
+            name="kWh Reading", line=dict(color="#10b981", width=2),
             mode="lines",
         ))
 
@@ -635,16 +657,16 @@ with tab3:
                 fig5.add_trace(go.Scatter(
                     x=anomalies["timestamp"], y=anomalies["kwh"],
                     mode="markers", name="Anomaly Flagged",
-                    marker=dict(color="#dc3545", size=6, symbol="circle"),
+                    marker=dict(color="#ef4444", size=6, symbol="circle"),
                 ))
 
         fig5.update_layout(
             title=f"Meter {sel_meter} — Consumption History",
-            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-            xaxis=dict(gridcolor="#30363d", title="Date"),
-            yaxis=dict(gridcolor="#30363d", title="kWh (15-min)"),
-            legend=dict(bgcolor="#161b22"),
+            paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+            font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+            xaxis=dict(gridcolor="#2a2a2a", title="Date"),
+            yaxis=dict(gridcolor="#2a2a2a", title="kWh (15-min)"),
+            legend=dict(bgcolor="#121212"),
         )
         st.plotly_chart(fig5, use_container_width=True)
 
@@ -656,12 +678,12 @@ with tab3:
         fig6 = px.bar(daily, x="date", y="kwh",
                      title=f"Daily Consumption — {sel_meter}",
                      labels={"kwh": "Daily kWh", "date": "Date"},
-                     color_discrete_sequence=["#58a6ff"])
+                     color_discrete_sequence=["#10b981"])
         fig6.update_layout(
-            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-            xaxis=dict(gridcolor="#30363d"),
-            yaxis=dict(gridcolor="#30363d"),
+            paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+            font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+            xaxis=dict(gridcolor="#2a2a2a"),
+            yaxis=dict(gridcolor="#2a2a2a"),
         )
         st.plotly_chart(fig6, use_container_width=True)
 
@@ -670,13 +692,13 @@ with tab3:
             m_alert = alerts[alerts["meter_id"] == sel_meter]
             if len(m_alert) > 0:
                 row = m_alert.iloc[0]
-                tier_color = {"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"}.get(str(row["alert_tier"]), "#8b949e")
+                tier_color = {"High": "#ef4444", "Medium": "#f59e0b", "Low": "#10b981"}.get(str(row["alert_tier"]), "#9a9a9a")
                 st.markdown(f"""
-                <div style="background:#161b22;border-left:3px solid {tier_color};border-radius:8px;padding:18px 20px;margin-top:12px">
+                <div style="background:#121212;border-left:3px solid {tier_color};border-radius:8px;padding:18px 20px;margin-top:12px">
                     <b style="color:{tier_color}">Alert Tier: {row['alert_tier']}</b> &nbsp;|&nbsp;
                     Risk Score: <b>{row['risk_score']:.3f}</b> &nbsp;|&nbsp;
                     Priority Rank: <b>#{int(row['priority_rank'])}</b><br>
-                    <span style="color:#8b949e;font-size:0.9rem">{row['reason_codes']}</span>
+                    <span style="color:#9a9a9a;font-size:0.9rem">{row['reason_codes']}</span>
                 </div>
                 """, unsafe_allow_html=True)
             else:
@@ -696,19 +718,19 @@ with tab4:
         fig7 = go.Figure()
         fig7.add_trace(go.Bar(
             name="Model MAPE", x=fc_metrics["zone_id"],
-            y=fc_metrics["model_mape_pct"], marker_color="#58a6ff",
+            y=fc_metrics["model_mape_pct"], marker_color="#10b981",
         ))
         fig7.add_trace(go.Bar(
             name="Baseline MAPE", x=fc_metrics["zone_id"],
-            y=fc_metrics["baseline_mape_pct"], marker_color="#6e7681",
+            y=fc_metrics["baseline_mape_pct"], marker_color="#6b7280",
         ))
         fig7.update_layout(
             barmode="group",
-            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-            xaxis=dict(gridcolor="#30363d", title="Zone"),
-            yaxis=dict(gridcolor="#30363d", title="MAPE (%)"),
-            legend=dict(bgcolor="#161b22"),
+            paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+            font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+            xaxis=dict(gridcolor="#2a2a2a", title="Zone"),
+            yaxis=dict(gridcolor="#2a2a2a", title="MAPE (%)"),
+            legend=dict(bgcolor="#121212"),
         )
         st.plotly_chart(fig7, use_container_width=True)
         st.dataframe(fc_metrics, use_container_width=True, hide_index=True)
@@ -734,8 +756,8 @@ with tab4:
                 x=["Normal", "Anomaly"], y=["Normal", "Anomaly"],
                 title="Confusion Matrix",
             )
-            fig8.update_layout(paper_bgcolor="#0d1117", font_color="#d0d6dc",
-                             plot_bgcolor="#161b22")
+            fig8.update_layout(paper_bgcolor="#0a0a0a", font_color="#d8d8d8",
+                             plot_bgcolor="#121212")
             st.plotly_chart(fig8, use_container_width=True)
 
         with ch2:
@@ -745,7 +767,7 @@ with tab4:
                 fig_pr.add_trace(go.Scatter(
                     x=pr_curve["recall"], y=pr_curve["precision"],
                     mode="lines+markers", name="PR Curve",
-                    line=dict(color="#58a6ff", width=2.5),
+                    line=dict(color="#10b981", width=2.5),
                     marker=dict(size=4),
                     text=pr_curve["threshold"].round(2),
                     hovertemplate="Threshold: %{text}<br>Precision: %{y:.2f}<br>Recall: %{x:.2f}",
@@ -755,15 +777,15 @@ with tab4:
                 fig_pr.add_trace(go.Scatter(
                     x=[best["recall"]], y=[best["precision"]],
                     mode="markers", name=f"Optimal (t={best['threshold']:.2f})",
-                    marker=dict(color="#dc3545", size=12, symbol="star"),
+                    marker=dict(color="#ef4444", size=12, symbol="star"),
                 ))
                 fig_pr.update_layout(
                     title="Precision-Recall Curve",
-                    paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-                    font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-                    xaxis=dict(title="Recall", gridcolor="#30363d", range=[0, 1.05]),
-                    yaxis=dict(title="Precision", gridcolor="#30363d", range=[0, 1.05]),
-                    legend=dict(bgcolor="#161b22"),
+                    paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+                    font_color="#d8d8d8", title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+                    xaxis=dict(title="Recall", gridcolor="#2a2a2a", range=[0, 1.05]),
+                    yaxis=dict(title="Precision", gridcolor="#2a2a2a", range=[0, 1.05]),
+                    legend=dict(bgcolor="#121212"),
                 )
                 st.plotly_chart(fig_pr, use_container_width=True)
 
@@ -843,16 +865,16 @@ with tab5:
         x=["Revenue Lost to Fraud", "Revenue Recovered", "Inspection Costs", "Net Gain"],
         y=[annual_revenue_lost/1e7, recoverable_revenue/1e7,
            -inspection_cost_total/1e7, 0],
-        connector=dict(line=dict(color="#30363d")),
-        increasing=dict(marker=dict(color="#198754")),
-        decreasing=dict(marker=dict(color="#dc3545")),
-        totals=dict(marker=dict(color="#58a6ff")),
+        connector=dict(line=dict(color="#2a2a2a")),
+        increasing=dict(marker=dict(color="#10b981")),
+        decreasing=dict(marker=dict(color="#ef4444")),
+        totals=dict(marker=dict(color="#f59e0b")),
     ))
     fig_wf.update_layout(
         title="Revenue Impact Waterfall (₹ Crore)",
-        paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-        font_color="#d0d6dc", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-        yaxis=dict(title="₹ Crore", gridcolor="#30363d"),
+        paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+        font_color="#d8d8d8", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+        yaxis=dict(title="₹ Crore", gridcolor="#2a2a2a"),
     )
     st.plotly_chart(fig_wf, use_container_width=True)
 
@@ -863,16 +885,16 @@ with tab5:
                      "GridRakshak Recovery Potential", "Net Gain after Inspection Cost"],
         "Amount (₹ Crore)": [bescom_revenue, atc_loss_crore,
                               round(our_recovery, 1), round(net_gain/1e7, 1)],
-        "Color": ["#58a6ff", "#dc3545", "#f7b731", "#198754"],
+        "Color": ["#10b981", "#ef4444", "#f59e0b", "#34d399"],
     })
     fig_ctx = px.bar(ctx_data, x="Category", y="Amount (₹ Crore)",
                      color="Category", color_discrete_sequence=ctx_data["Color"].tolist(),
                      title="GridRakshak Impact vs Network Scale")
     fig_ctx.update_layout(
-        paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
-        font_color="#d0d6dc", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
-        xaxis=dict(gridcolor="#30363d"),
-        yaxis=dict(title="₹ Crore", gridcolor="#30363d"),
+        paper_bgcolor="#0a0a0a", plot_bgcolor="#121212",
+        font_color="#d8d8d8", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d8d8d8"),
+        xaxis=dict(gridcolor="#2a2a2a"),
+        yaxis=dict(title="₹ Crore", gridcolor="#2a2a2a"),
     )
     st.plotly_chart(fig_ctx, use_container_width=True)
 
