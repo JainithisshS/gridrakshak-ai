@@ -111,20 +111,28 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
     uci_mean = resample["global_kwh"].mean()
     print(f"  UCI 15-min mean: {uci_mean:.4f} kWh → scaling to BESCOM feeder range")
 
+    # 3 normal meters per zone — gives a realistic peer group (12 normal + 4 fraud = 16 total)
+    # without diluting fraud signals from shared UCI household patterns
+    METERS_PER_ZONE = 3
+
     rows = []
     for zone_id, target_mean in TARGET_MEANS.items():
-        tmp = resample[["timestamp", "global_kwh"]].copy()
+        tmp_base = resample[["timestamp", "global_kwh"]].copy()
+        scale    = target_mean / max(uci_mean, 0.01)
 
-        # Scale so zone mean matches BESCOM target + zone-specific noise (±10%)
-        # Slightly higher noise makes normal meters more variable → realistic
-        scale = target_mean / max(uci_mean, 0.01)
-        rng_z = np.random.default_rng(abs(hash(zone_id)) % 10000)
-        noise = 1.0 + rng_z.normal(0, 0.10, len(tmp))
+        for m_idx in range(METERS_PER_ZONE):
+            tmp   = tmp_base.copy()
+            seed  = abs(hash(zone_id + str(m_idx))) % 100_000
+            rng_z = np.random.default_rng(seed)
 
-        tmp["kwh"]      = (tmp["global_kwh"] * scale * noise).clip(lower=0)
-        tmp["zone_id"]  = zone_id
-        tmp["meter_id"] = f"REAL_{zone_id}_M01"
-        rows.append(tmp[["timestamp", "kwh", "zone_id", "meter_id"]])
+            # Each meter: unique scale ±15% + per-reading noise ±10%
+            meter_scale = scale * rng_z.uniform(0.85, 1.15)
+            noise       = 1.0 + rng_z.normal(0, 0.10, len(tmp))
+
+            tmp["kwh"]      = (tmp["global_kwh"] * meter_scale * noise).clip(lower=0)
+            tmp["zone_id"]  = zone_id
+            tmp["meter_id"] = f"REAL_{zone_id}_M{m_idx+1:02d}"
+            rows.append(tmp[["timestamp", "kwh", "zone_id", "meter_id"]])
 
     readings = pd.concat(rows, ignore_index=True)
     readings["kwh"]        = readings["kwh"].clip(lower=0)
@@ -133,13 +141,14 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
     # Verify scaling
     for zone_id in TARGET_MEANS:
         actual = readings[readings["zone_id"] == zone_id]["kwh"].mean()
-        print(f"  {zone_id} ({ZONE_MAP[zone_id]['zone_name']}): mean={actual:.2f} kWh/15-min (target={TARGET_MEANS[zone_id]})")
+        print(f"  {zone_id} ({ZONE_MAP[zone_id]['zone_name']}): mean={actual:.2f} kWh/15-min "
+              f"(target={TARGET_MEANS[zone_id]}, meters={METERS_PER_ZONE})")
 
     zones = pd.DataFrame([{"zone_id": zid, **info} for zid, info in ZONE_MAP.items()])
     zones = zones.rename(columns={"capacity_kw": "feeder_capacity_kw"})
 
     meters = pd.DataFrame([{
-        "meter_id":    f"REAL_{zid}_M01",
+        "meter_id":    f"REAL_{zid}_M{m+1:02d}",
         "zone_id":     zid,
         "zone_name":   ZONE_MAP[zid]["zone_name"],
         "area_type":   ZONE_MAP[zid]["area_type"],
@@ -148,7 +157,7 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
         "is_fraud":    False,
         "fraud_label": 0,
         "missing_pct": 0.0,
-    } for zid in ZONE_MAP])
+    } for zid in ZONE_MAP for m in range(METERS_PER_ZONE)])
 
     return readings, zones, meters
 
@@ -167,11 +176,14 @@ def inject_fraud_into_real(
     """
     new_readings = readings.copy()
     new_meters   = meters.copy()
-    all_meter_ids = readings["meter_id"].unique().tolist()
 
-    fraud_meters = {}
+    # One fraud meter per zone — pick M01 from each zone as the source
+    zone_ids      = list(readings["zone_id"].unique())
+    fraud_meters  = {}
+
     for i, ftype in enumerate(FRAUD_TYPES):
-        source_mid = all_meter_ids[i % len(all_meter_ids)]
+        zone_id    = zone_ids[i % len(zone_ids)]
+        source_mid = f"REAL_{zone_id}_M01"   # clone from first normal meter
         new_mid    = f"REAL_FRAUD_{ftype.upper()[:3]}_M01"
 
         clone = readings[readings["meter_id"] == source_mid].copy()
@@ -207,10 +219,12 @@ def inject_fraud_into_real(
                                            TARGET_MEANS.get(clone["zone_id"].iloc[0], 65) * 4)
 
         elif ftype == "zone_mismatch":
-            # Use different zone's pattern (different daily shape)
-            other_mid = all_meter_ids[(i + 2) % len(all_meter_ids)]
+            # Use a meter from a different zone (different daily load shape)
+            all_mids  = readings["meter_id"].unique().tolist()
+            other_mid = all_mids[(i + 2) % len(all_mids)]
             other_kwh = readings[readings["meter_id"] == other_mid]["kwh"].values
             kwh = other_kwh[:n] if len(other_kwh) >= n else np.pad(other_kwh, (0, n - len(other_kwh)), mode="wrap")
+
 
         clone = clone.copy()
         clone["kwh"] = kwh

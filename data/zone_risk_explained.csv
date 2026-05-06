@@ -1,9 +1,9 @@
 zone_id,zone_name,risk_tier,peak_forecast_kwh,capacity_kw,capacity_usage_pct,exceedance_rate_pct,model_mape_pct,baseline_mape_pct,zone_alert_reason
-Z03,Indiranagar,Low,3.5,1100,8.8,0.0,3.32,6.88,NORMAL: Indiranagar demand within expected range. Forecast peak: 3.5 kWh. Model SMAPE: 3.3%. No action required.
-Z07,Malleshwaram,Low,3.6,700,8.3,0.0,2.37,4.26,NORMAL: Malleshwaram demand within expected range. Forecast peak: 3.6 kWh. Model SMAPE: 2.4%. No action required.
-Z02,Koramangala,Low,3.7,1400,7.8,0.0,5.06,11.11,NORMAL: Koramangala demand within expected range. Forecast peak: 3.7 kWh. Model SMAPE: 5.1%. No action required.
-Z01,Jayanagar,Low,3.6,850,7.8,0.0,7.39,8.45,NORMAL: Jayanagar demand within expected range. Forecast peak: 3.6 kWh. Model SMAPE: 7.4%. No action required.
-Z05,Rajajinagar,Low,3.7,750,7.3,0.0,3.41,6.16,NORMAL: Rajajinagar demand within expected range. Forecast peak: 3.7 kWh. Model SMAPE: 3.4%. No action required.
-Z06,HSR Layout,Low,3.8,950,7.1,0.0,7.28,8.29,NORMAL: HSR Layout demand within expected range. Forecast peak: 3.8 kWh. Model SMAPE: 7.3%. No action required.
-Z08,Electronic City,Low,4.4,2200,4.4,0.0,2.46,2.65,NORMAL: Electronic City demand within expected range. Forecast peak: 4.4 kWh. Model SMAPE: 2.5%. No action required.
-Z04,Whitefield,Low,4.6,1800,3.8,0.0,2.29,2.51,NORMAL: Whitefield demand within expected range. Forecast peak: 4.6 kWh. Model SMAPE: 2.3%. No action required.
+Z03,Indiranagar,Low,3.5,1100,8.9,0.0,3.18,7.34,NORMAL: Indiranagar demand within expected range. Forecast peak: 3.5 kWh. Model SMAPE: 3.2%. No action required.
+Z07,Malleshwaram,Low,3.6,700,8.4,0.0,2.62,4.33,NORMAL: Malleshwaram demand within expected range. Forecast peak: 3.6 kWh. Model SMAPE: 2.6%. No action required.
+Z01,Jayanagar,Low,3.6,850,7.8,0.0,6.59,8.3,NORMAL: Jayanagar demand within expected range. Forecast peak: 3.6 kWh. Model SMAPE: 6.6%. No action required.
+Z02,Koramangala,Low,3.7,1400,7.4,0.0,5.75,12.17,NORMAL: Koramangala demand within expected range. Forecast peak: 3.7 kWh. Model SMAPE: 5.8%. No action required.
+Z05,Rajajinagar,Low,3.7,750,7.3,0.0,3.46,6.13,NORMAL: Rajajinagar demand within expected range. Forecast peak: 3.7 kWh. Model SMAPE: 3.5%. No action required.
+Z06,HSR Layout,Low,3.8,950,7.1,0.0,6.71,8.74,NORMAL: HSR Layout demand within expected range. Forecast peak: 3.8 kWh. Model SMAPE: 6.7%. No action required.
+Z08,Electronic City,Low,4.4,2200,4.4,0.0,2.34,2.58,NORMAL: Electronic City demand within expected range. Forecast peak: 4.4 kWh. Model SMAPE: 2.3%. No action required.
+Z04,Whitefield,Low,4.6,1800,3.8,0.0,2.18,2.45,NORMAL: Whitefield demand within expected range. Forecast peak: 4.6 kWh. Model SMAPE: 2.2%. No action required.

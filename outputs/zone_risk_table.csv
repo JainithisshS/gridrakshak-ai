@@ -1,9 +1,9 @@
 zone_id,zone_name,risk_tier,peak_forecast_kwh,capacity_kw,capacity_usage_pct,exceedance_rate_pct,model_mape_pct,baseline_mape_pct
-Z03,Indiranagar,Low,3.5,1100,8.9,0.0,3.18,7.34
-Z07,Malleshwaram,Low,3.6,700,8.4,0.0,2.62,4.33
-Z01,Jayanagar,Low,3.6,850,7.8,0.0,6.59,8.3
-Z02,Koramangala,Low,3.7,1400,7.4,0.0,5.75,12.17
-Z05,Rajajinagar,Low,3.7,750,7.3,0.0,3.46,6.13
-Z06,HSR Layout,Low,3.8,950,7.1,0.0,6.71,8.74
-Z08,Electronic City,Low,4.4,2200,4.4,0.0,2.34,2.58
-Z04,Whitefield,Low,4.6,1800,3.8,0.0,2.18,2.45
+Z03,Indiranagar,Low,3.5,1100,8.9,0.0,3.15,6.98
+Z07,Malleshwaram,Low,3.6,700,8.4,0.0,2.43,4.3
+Z01,Jayanagar,Low,3.6,850,7.9,0.0,6.83,8.83
+Z02,Koramangala,Low,3.7,1400,7.6,0.0,6.45,13.09
+Z05,Rajajinagar,Low,3.7,750,7.3,0.0,3.47,6.19
+Z06,HSR Layout,Low,3.8,950,7.1,0.0,7.3,8.0
+Z08,Electronic City,Low,4.4,2200,4.4,0.0,2.34,2.73
+Z04,Whitefield,Low,4.6,1800,3.8,0.0,2.41,2.52

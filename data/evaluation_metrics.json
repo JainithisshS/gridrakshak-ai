@@ -2,15 +2,15 @@
   "total_raw_alerts": 80,
   "after_level1_filter": 52,
   "after_level2_filter": 36,
-  "after_level3_filter": 14,
+  "after_level3_filter": 13,
   "true_positives": 12,
-  "false_positives": 2,
+  "false_positives": 1,
   "false_negatives": 0,
-  "true_negatives": 66,
-  "precision": 0.857,
+  "true_negatives": 67,
+  "precision": 0.923,
   "recall": 1.0,
-  "f1_score": 0.923,
-  "pr_auc": 0.924,
-  "alert_reduction_rate": 82.5,
-  "false_positive_rate": 0.029
+  "f1_score": 0.96,
+  "pr_auc": 0.935,
+  "alert_reduction_rate": 83.8,
+  "false_positive_rate": 0.015
 }

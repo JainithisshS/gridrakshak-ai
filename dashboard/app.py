@@ -370,14 +370,18 @@ if not check_outputs():
 # ── Dataset context banner ────────────────────────────────────────────────
 if IS_REAL:
     st.info(
-        "**Real UCI Household Dataset** — Individual household electric power consumption "
-        "(2006–2010, 2M rows, 1-min intervals). Fraud patterns injected into real baseline for "
-        "ground-truth validation."
+        "**Real UCI Household Dataset (Scaled to BESCOM)** — "
+        "Source: UCI Household Electric Power Consumption (2006–2010, 2M rows, 1-min intervals). "
+        "Resampled to 15-min kWh and scaled to BESCOM feeder range. "
+        "**16 meters** across 4 Bangalore-style feeders (Indiranagar, Koramangala, Whitefield, Jayanagar) — "
+        "12 normal + 4 fraud meters with injected theft patterns (sudden drop, under-reporting, "
+        "periodic spike, zone mismatch). Used for real-world model validation."
     )
 else:
     st.info(
         "**Synthetic BESCOM Dataset** — 8 real Bangalore zones, 80 meters, 90 days, 691K readings. "
-        "Includes area-type profiles, temperature-driven AC load, festival boosts, and 12 fraud meters."
+        "Includes area-type profiles (residential/commercial/industrial/mixed), "
+        "temperature-driven AC load, festival boosts, and 12 injected fraud meters."
     )
 
 # ── Dynamic data loading based on dataset choice ─────────────────────────────

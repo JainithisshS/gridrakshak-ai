@@ -12,15 +12,15 @@ no cloud dependency.
 ## Forecasting Performance
 | Zone | Model SMAPE | Baseline SMAPE | Improvement % | Status |
 |---|---|---|---|---|
-| Jayanagar | 7.39% | 8.45% | +1.1% | ✅ |
-| Koramangala | 5.06% | 11.11% | +6.0% | ✅ |
-| Whitefield | 3.32% | 6.88% | +3.6% | ✅ |
-| Rajajinagar | 2.29% | 2.51% | +0.2% | ✅ |
-| Hebbal | 3.41% | 6.16% | +2.8% | ✅ |
-| Indiranagar | 7.28% | 8.29% | +1.0% | ✅ |
-| BTM Layout | 2.37% | 4.26% | +1.9% | ✅ |
-| Yeshwanthpur | 2.46% | 2.65% | +0.2% | ✅ |
-| **Overall** | **4.2%** | **6.29%** | **+33.2%** | **✅ PASS** |
+| Jayanagar | 6.59% | 8.3% | +1.7% | ✅ |
+| Koramangala | 5.75% | 12.17% | +6.4% | ✅ |
+| Whitefield | 3.18% | 7.34% | +4.2% | ✅ |
+| Rajajinagar | 2.18% | 2.45% | +0.3% | ✅ |
+| Hebbal | 3.46% | 6.13% | +2.7% | ✅ |
+| Indiranagar | 6.71% | 8.74% | +2.0% | ✅ |
+| BTM Layout | 2.62% | 4.33% | +1.7% | ✅ |
+| Yeshwanthpur | 2.34% | 2.58% | +0.2% | ✅ |
+| **Overall** | **4.1%** | **6.5%** | **+36.9%** | **✅ PASS** |
 
 **Validation method:** 5-fold walk-forward cross-validation, 24h leakage gap
 
@@ -29,13 +29,13 @@ no cloud dependency.
 ## Anomaly Detection Performance
 | Metric | Value | Target | Status |
 |---|---|---|---|
-| Precision | 85.7% | > 70% | ✅ PASS |
+| Precision | 92.3% | > 70% | ✅ PASS |
 | Recall | 100.0% | > 60% | ✅ PASS |
-| F1 Score | 0.923 | — | — |
-| PR-AUC | 0.924 | — | — |
-| Alert Reduction | 82% | — | — |
+| F1 Score | 0.960 | — | — |
+| PR-AUC | 0.935 | — | — |
+| Alert Reduction | 84% | — | — |
 | True Positives | 12 of 12 | All fraud meters | ✅ |
-| False Positives | 2 | Minimize | ✅ |
+| False Positives | 1 | Minimize | ✅ |
 
 **3-layer detection:** Statistical Z-score → Isolation Forest → Peer DTW comparison
 
@@ -53,7 +53,7 @@ no cloud dependency.
 ## Real-World Validation (UCI Household Dataset)
 | Metric | Value | Baseline | Status |
 |---|---|---|---|
-| SMAPE (4 zones, 150 days) | 45.03% | 53.25% | ✅ Beats baseline |
+| SMAPE (4 zones, 150 days) | 44.92% | 52.9% | ✅ Beats baseline |
 | Anomaly Detection F1 | See real_data_anomaly_metrics.csv | — | ✅ Validated |
 
 > **Note:** UCI data is a single French household scaled to zone level — inherently harder than grid-level BESCOM aggregation. The model still beats the naive baseline, proving generalization beyond synthetic data.
@@ -63,15 +63,15 @@ no cloud dependency.
 ## Pass / Fail Summary
 | Objective | Result | Status |
 |---|---|---|
-| Model MAPE < Baseline | 4.2% < 6.29% | ✅ PASS |
-| Precision > 70% | 85.7% | ✅ PASS |
+| Model MAPE < Baseline | 4.1% < 6.5% | ✅ PASS |
+| Precision > 70% | 92.3% | ✅ PASS |
 | Recall > 60% | 100.0% | ✅ PASS |
 | Mis-tagged meter detected | 41 found | ✅ PASS |
 
 ---
 
 ## Key Finding
-GridRakshak AI achieves a **33.2% improvement** in forecast accuracy over the historical baseline (SMAPE 4.2% vs 6.29%), validated using 5-fold walk-forward cross-validation with a 24-hour leakage gap.
+GridRakshak AI achieves a **36.9% improvement** in forecast accuracy over the historical baseline (SMAPE 4.1% vs 6.5%), validated using 5-fold walk-forward cross-validation with a 24-hour leakage gap.
 
 ---
 
