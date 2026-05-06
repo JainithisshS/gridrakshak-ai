@@ -1,67 +1,67 @@
 {
   "overall": {
-    "model_mape": 4.1,
-    "baseline1_mape": 6.5,
-    "baseline2_mape": 6.3,
-    "improvement_vs_baseline1_pct": 36.92,
+    "model_mape": 4.03,
+    "baseline1_mape": 6.42,
+    "baseline2_mape": 6.23,
+    "improvement_vs_baseline1_pct": 37.23,
     "validation_method": "5-fold walk-forward cross-validation (24h leakage gap)"
   },
   "per_zone": {
     "Jayanagar": {
-      "model_mape": 6.59,
-      "baseline_mape": 8.3,
-      "improvement_pct": 1.71,
-      "cv_mape_mean": 2.82,
-      "cv_mape_std": 0.31
+      "model_mape": 6.58,
+      "baseline_mape": 8.44,
+      "improvement_pct": 1.86,
+      "cv_mape_mean": 3.0,
+      "cv_mape_std": 0.42
     },
     "Koramangala": {
-      "model_mape": 5.75,
-      "baseline_mape": 12.17,
-      "improvement_pct": 6.42,
-      "cv_mape_mean": 4.93,
-      "cv_mape_std": 1.31
+      "model_mape": 5.25,
+      "baseline_mape": 11.24,
+      "improvement_pct": 5.99,
+      "cv_mape_mean": 5.71,
+      "cv_mape_std": 0.69
     },
     "Whitefield": {
-      "model_mape": 3.18,
-      "baseline_mape": 7.34,
-      "improvement_pct": 4.16,
-      "cv_mape_mean": 3.87,
-      "cv_mape_std": 2.5
+      "model_mape": 3.56,
+      "baseline_mape": 7.58,
+      "improvement_pct": 4.01,
+      "cv_mape_mean": 2.85,
+      "cv_mape_std": 0.83
     },
     "Rajajinagar": {
       "model_mape": 2.18,
-      "baseline_mape": 2.45,
-      "improvement_pct": 0.27,
+      "baseline_mape": 2.56,
+      "improvement_pct": 0.38,
       "cv_mape_mean": 0.41,
-      "cv_mape_std": 0.17
+      "cv_mape_std": 0.16
     },
     "Hebbal": {
-      "model_mape": 3.46,
-      "baseline_mape": 6.13,
-      "improvement_pct": 2.67,
-      "cv_mape_mean": 1.63,
-      "cv_mape_std": 0.51
+      "model_mape": 3.06,
+      "baseline_mape": 6.11,
+      "improvement_pct": 3.05,
+      "cv_mape_mean": 1.67,
+      "cv_mape_std": 0.32
     },
     "Indiranagar": {
-      "model_mape": 6.71,
-      "baseline_mape": 8.74,
-      "improvement_pct": 2.04,
-      "cv_mape_mean": 2.85,
-      "cv_mape_std": 0.52
+      "model_mape": 6.9,
+      "baseline_mape": 8.55,
+      "improvement_pct": 1.65,
+      "cv_mape_mean": 3.17,
+      "cv_mape_std": 1.14
     },
     "BTM Layout": {
-      "model_mape": 2.62,
-      "baseline_mape": 4.33,
-      "improvement_pct": 1.71,
-      "cv_mape_mean": 1.1,
-      "cv_mape_std": 0.36
+      "model_mape": 2.3,
+      "baseline_mape": 4.27,
+      "improvement_pct": 1.97,
+      "cv_mape_mean": 1.19,
+      "cv_mape_std": 0.49
     },
     "Yeshwanthpur": {
-      "model_mape": 2.34,
-      "baseline_mape": 2.58,
-      "improvement_pct": 0.24,
+      "model_mape": 2.37,
+      "baseline_mape": 2.62,
+      "improvement_pct": 0.26,
       "cv_mape_mean": 0.46,
-      "cv_mape_std": 0.23
+      "cv_mape_std": 0.22
     }
   }
 }

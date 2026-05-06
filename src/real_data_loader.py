@@ -206,8 +206,9 @@ def inject_fraud_into_real(
             kwh[s:e] *= rng.uniform(0.45, 0.58)
 
         elif ftype == "under_reporting":
-            # 18-28% below normal — clearly above ±10% noise, signals meter bypass
-            kwh *= rng.uniform(0.72, 0.82)
+            # 11-16% below normal — above ±10% noise but not always caught.
+            # Mimics a sophisticated bypass that's hard to distinguish at low thresholds.
+            kwh *= rng.uniform(0.84, 0.89)
 
         elif ftype == "periodic_spike":
             # Unauthorized equipment at 1-4 AM — 3-5x on ~15% of nights

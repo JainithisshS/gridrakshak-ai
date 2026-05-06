@@ -1,9 +1,9 @@
-zone_id,zone_name,risk_tier,peak_forecast_kwh,capacity_kw,capacity_usage_pct,exceedance_rate_pct,model_mape_pct,baseline_mape_pct,fraud_meter_count,medium_alert_count,avg_risk_score,max_risk_score
-Z03,Indiranagar,Medium,3.5,1100,8.9,0.0,3.56,7.58,0,1,0.163,0.58
-Z07,Malleshwaram,Medium,3.6,700,8.3,0.0,2.3,4.27,0,1,0.156,0.414
-Z01,Jayanagar,Medium,3.6,850,7.8,0.0,6.58,8.44,0,2,0.191,0.571
-Z02,Koramangala,High,3.7,1400,7.6,0.0,5.25,11.24,2,1,0.29,0.63
-Z05,Rajajinagar,Medium,3.7,750,7.3,0.0,3.06,6.11,0,2,0.236,0.563
-Z06,HSR Layout,Medium,3.8,950,7.0,0.0,6.9,8.55,0,1,0.155,0.559
-Z08,Electronic City,Medium,4.4,2200,4.5,0.0,2.37,2.62,0,1,0.126,0.411
-Z04,Whitefield,High,4.6,1800,3.8,0.0,2.18,2.56,1,1,0.192,0.643
+zone_id,zone_name,risk_tier,peak_forecast_kwh,capacity_kw,capacity_usage_pct,exceedance_rate_pct,model_mape_pct,baseline_mape_pct
+Z03,Indiranagar,Low,3.5,1100,8.9,0.0,2.81,8.01
+Z07,Malleshwaram,Low,3.6,700,8.5,0.0,2.58,4.28
+Z02,Koramangala,Low,3.7,1400,8.4,0.0,5.07,12.32
+Z01,Jayanagar,Low,3.7,850,7.8,0.0,6.92,8.2
+Z05,Rajajinagar,Low,3.7,750,7.2,0.0,3.21,6.13
+Z06,HSR Layout,Low,3.8,950,7.1,0.0,6.64,8.4
+Z08,Electronic City,Low,4.4,2200,4.4,0.0,2.35,2.65
+Z04,Whitefield,Low,4.6,1800,3.9,0.0,2.38,2.56
