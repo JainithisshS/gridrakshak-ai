@@ -1,0 +1,9 @@
+zone_id,model_mape_pct,baseline_mape_pct,improvement_pct,cv_mape_mean,cv_mape_std,cv_folds,test_samples,mape_improvement
+Z01,7.39,8.45,1.06,2.89,0.58,"[np.float64(2.73), np.float64(2.5), np.float64(2.24), np.float64(3.06), np.float64(3.91)]",432,1.0599999999999996
+Z02,5.06,11.11,6.05,4.67,1.0,"[np.float64(6.14), np.float64(4.76), np.float64(4.34), np.float64(3.06), np.float64(5.06)]",432,6.05
+Z03,3.32,6.88,3.56,2.9,1.14,"[np.float64(4.47), np.float64(3.16), np.float64(1.44), np.float64(1.77), np.float64(3.65)]",432,3.56
+Z04,2.29,2.51,0.21,0.42,0.18,"[np.float64(0.32), np.float64(0.27), np.float64(0.24), np.float64(0.58), np.float64(0.69)]",432,0.21999999999999975
+Z05,3.41,6.16,2.75,1.64,0.56,"[np.float64(1.37), np.float64(1.75), np.float64(0.97), np.float64(1.47), np.float64(2.65)]",432,2.75
+Z06,7.28,8.29,1.01,2.53,0.67,"[np.float64(1.94), np.float64(2.7), np.float64(2.02), np.float64(2.24), np.float64(3.77)]",432,1.009999999999999
+Z07,2.37,4.26,1.89,1.11,0.37,"[np.float64(1.15), np.float64(1.15), np.float64(0.57), np.float64(0.97), np.float64(1.73)]",432,1.8899999999999997
+Z08,2.46,2.65,0.19,0.46,0.23,"[np.float64(0.34), np.float64(0.27), np.float64(0.23), np.float64(0.63), np.float64(0.82)]",432,0.18999999999999995

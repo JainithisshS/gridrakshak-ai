@@ -1,0 +1,5 @@
+zone_id,model_mape_pct,baseline_mape_pct,improvement_pct,cv_mape_mean,cv_mape_std,cv_folds,test_samples
+Z_A,44.38,53.54,9.17,26.12,19.5,"[np.float64(10.04), np.float64(55.06), np.float64(12.19), np.float64(44.13), np.float64(9.17)]",721
+Z_B,44.63,52.39,7.76,30.23,18.88,"[np.float64(8.52), np.float64(54.95), np.float64(44.95), np.float64(34.12), np.float64(8.6)]",721
+Z_C,46.67,54.73,8.06,24.55,18.01,"[np.float64(8.02), np.float64(55.24), np.float64(17.47), np.float64(33.86), np.float64(8.14)]",721
+Z_D,44.45,52.35,7.89,29.09,18.58,"[np.float64(8.26), np.float64(54.89), np.float64(42.55), np.float64(31.64), np.float64(8.12)]",721

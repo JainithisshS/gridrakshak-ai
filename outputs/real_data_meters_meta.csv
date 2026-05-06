@@ -1,0 +1,9 @@
+meter_id,zone_id,zone_name,area_type,base_scale,fraud_type,is_fraud,fraud_label,missing_pct
+REAL_Z_A_M01,Z_A,Indiranagar Feeder,mixed,1.0,none,False,0,0.0
+REAL_Z_B_M01,Z_B,Koramangala Feeder,residential,1.0,none,False,0,0.0
+REAL_Z_C_M01,Z_C,Whitefield Feeder,commercial,1.0,none,False,0,0.0
+REAL_Z_D_M01,Z_D,Jayanagar Feeder,residential,1.0,none,False,0,0.0
+REAL_FRAUD_SUD_M01,Z_A,Indiranagar Feeder,mixed,1.0,sudden_drop,True,1,0.0
+REAL_FRAUD_UND_M01,Z_B,Koramangala Feeder,residential,1.0,under_reporting,True,1,0.0
+REAL_FRAUD_PER_M01,Z_C,Whitefield Feeder,commercial,1.0,periodic_spike,True,1,0.0
+REAL_FRAUD_ZON_M01,Z_D,Jayanagar Feeder,residential,1.0,zone_mismatch,True,1,0.0

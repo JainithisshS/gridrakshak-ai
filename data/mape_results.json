@@ -1,0 +1,67 @@
+{
+  "overall": {
+    "model_mape": 4.2,
+    "baseline1_mape": 6.29,
+    "baseline2_mape": 6.1,
+    "improvement_vs_baseline1_pct": 33.23,
+    "validation_method": "5-fold walk-forward cross-validation (24h leakage gap)"
+  },
+  "per_zone": {
+    "Jayanagar": {
+      "model_mape": 7.39,
+      "baseline_mape": 8.45,
+      "improvement_pct": 1.06,
+      "cv_mape_mean": 2.89,
+      "cv_mape_std": 0.58
+    },
+    "Koramangala": {
+      "model_mape": 5.06,
+      "baseline_mape": 11.11,
+      "improvement_pct": 6.05,
+      "cv_mape_mean": 4.67,
+      "cv_mape_std": 1.0
+    },
+    "Whitefield": {
+      "model_mape": 3.32,
+      "baseline_mape": 6.88,
+      "improvement_pct": 3.56,
+      "cv_mape_mean": 2.9,
+      "cv_mape_std": 1.14
+    },
+    "Rajajinagar": {
+      "model_mape": 2.29,
+      "baseline_mape": 2.51,
+      "improvement_pct": 0.21,
+      "cv_mape_mean": 0.42,
+      "cv_mape_std": 0.18
+    },
+    "Hebbal": {
+      "model_mape": 3.41,
+      "baseline_mape": 6.16,
+      "improvement_pct": 2.75,
+      "cv_mape_mean": 1.64,
+      "cv_mape_std": 0.56
+    },
+    "Indiranagar": {
+      "model_mape": 7.28,
+      "baseline_mape": 8.29,
+      "improvement_pct": 1.01,
+      "cv_mape_mean": 2.53,
+      "cv_mape_std": 0.67
+    },
+    "BTM Layout": {
+      "model_mape": 2.37,
+      "baseline_mape": 4.26,
+      "improvement_pct": 1.89,
+      "cv_mape_mean": 1.11,
+      "cv_mape_std": 0.37
+    },
+    "Yeshwanthpur": {
+      "model_mape": 2.46,
+      "baseline_mape": 2.65,
+      "improvement_pct": 0.19,
+      "cv_mape_mean": 0.46,
+      "cv_mape_std": 0.23
+    }
+  }
+}

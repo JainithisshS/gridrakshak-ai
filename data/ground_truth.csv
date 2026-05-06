@@ -1,0 +1,13 @@
+meter_id,zone,anomaly_type,fraud_type,anomaly_days,description,is_fraud
+M01004,Z01,irregular,periodic_spike,"60,70,80",Periodic spikes at night — unauthorized usage or meter fault,True
+M01005,Z01,theft,under_reporting,"60,70,80",Systematic under-reporting — meter tampered or bypassed,True
+M02002,Z02,theft,sudden_drop,"60,70,80",Sudden consumption drop — possible meter bypass or illegal tap,True
+M02004,Z02,theft,under_reporting,"60,70,80",Systematic under-reporting — meter tampered or bypassed,True
+M02005,Z02,theft,sudden_drop,"60,70,80",Sudden consumption drop — possible meter bypass or illegal tap,True
+M02008,Z02,irregular,periodic_spike,"60,70,80",Periodic spikes at night — unauthorized usage or meter fault,True
+M03009,Z03,theft,sudden_drop,"60,70,80",Sudden consumption drop — possible meter bypass or illegal tap,True
+M04002,Z04,mis_tagged,zone_mismatch,"60,70,80",Load pattern matches different feeder zone — feeder mis-tagging suspected,True
+M04006,Z04,theft,under_reporting,"60,70,80",Systematic under-reporting — meter tampered or bypassed,True
+M06005,Z06,irregular,periodic_spike,"60,70,80",Periodic spikes at night — unauthorized usage or meter fault,True
+M07010,Z07,mis_tagged,zone_mismatch,"60,70,80",Load pattern matches different feeder zone — feeder mis-tagging suspected,True
+M08009,Z08,mis_tagged,zone_mismatch,"60,70,80",Load pattern matches different feeder zone — feeder mis-tagging suspected,True

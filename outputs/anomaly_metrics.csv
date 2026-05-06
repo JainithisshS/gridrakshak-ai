@@ -1,0 +1,2 @@
+threshold,precision,recall,f1,fpr,pr_auc,tp,fp,tn,fn
+0.25,0.857,1.0,0.923,0.029,0.924,12,2,66,0

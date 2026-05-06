@@ -1,0 +1,9 @@
+zone_id,zone_name,capacity_kw,area_type
+Z01,Jayanagar,850,residential
+Z02,Koramangala,1400,commercial
+Z03,Indiranagar,1100,mixed
+Z04,Whitefield,1800,industrial
+Z05,Rajajinagar,750,residential
+Z06,HSR Layout,950,mixed
+Z07,Malleshwaram,700,residential
+Z08,Electronic City,2200,industrial

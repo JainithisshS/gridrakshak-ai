@@ -1,0 +1,81 @@
+meter_id,zone_id,zone_name,area_type,base_scale,fraud_type,is_fraud,fraud_label,missing_pct
+M01001,Z01,Jayanagar,residential,1.3,none,False,0,0.69
+M01002,Z01,Jayanagar,residential,1.0,none,False,0,1.09
+M01003,Z01,Jayanagar,residential,0.8,none,False,0,0.71
+M01004,Z01,Jayanagar,residential,1.0,periodic_spike,True,1,0.66
+M01005,Z01,Jayanagar,residential,1.3,under_reporting,True,1,0.86
+M01006,Z01,Jayanagar,residential,1.0,none,False,0,1.01
+M01007,Z01,Jayanagar,residential,0.6,none,False,0,0.64
+M01008,Z01,Jayanagar,residential,0.8,none,False,0,1.2
+M01009,Z01,Jayanagar,residential,1.0,none,False,0,0.86
+M01010,Z01,Jayanagar,residential,1.0,none,False,0,0.97
+M02001,Z02,Koramangala,commercial,1.5,none,False,0,0.54
+M02002,Z02,Koramangala,commercial,1.5,sudden_drop,True,1,0.73
+M02003,Z02,Koramangala,commercial,1.5,none,False,0,1.04
+M02004,Z02,Koramangala,commercial,1.5,under_reporting,True,1,1.19
+M02005,Z02,Koramangala,commercial,1.5,sudden_drop,True,1,1.26
+M02006,Z02,Koramangala,commercial,0.7,none,False,0,0.79
+M02007,Z02,Koramangala,commercial,1.5,none,False,0,0.66
+M02008,Z02,Koramangala,commercial,0.7,periodic_spike,True,1,0.51
+M02009,Z02,Koramangala,commercial,1.0,none,False,0,0.73
+M02010,Z02,Koramangala,commercial,1.0,none,False,0,0.97
+M03001,Z03,Indiranagar,mixed,0.7,none,False,0,0.66
+M03002,Z03,Indiranagar,mixed,1.0,none,False,0,0.52
+M03003,Z03,Indiranagar,mixed,0.7,none,False,0,0.65
+M03004,Z03,Indiranagar,mixed,0.7,none,False,0,0.59
+M03005,Z03,Indiranagar,mixed,0.7,none,False,0,0.61
+M03006,Z03,Indiranagar,mixed,0.7,none,False,0,0.67
+M03007,Z03,Indiranagar,mixed,1.0,none,False,0,1.06
+M03008,Z03,Indiranagar,mixed,0.7,none,False,0,0.79
+M03009,Z03,Indiranagar,mixed,1.4,sudden_drop,True,1,1.2
+M03010,Z03,Indiranagar,mixed,0.7,none,False,0,0.62
+M04001,Z04,Whitefield,industrial,7.0,none,False,0,0.69
+M04002,Z04,Whitefield,industrial,4.0,zone_mismatch,True,1,0.64
+M04003,Z04,Whitefield,industrial,1.0,none,False,0,0.97
+M04004,Z04,Whitefield,industrial,4.0,none,False,0,0.56
+M04005,Z04,Whitefield,industrial,2.0,none,False,0,0.66
+M04006,Z04,Whitefield,industrial,2.0,under_reporting,True,1,0.56
+M04007,Z04,Whitefield,industrial,1.0,none,False,0,0.52
+M04008,Z04,Whitefield,industrial,1.0,none,False,0,1.38
+M04009,Z04,Whitefield,industrial,7.0,none,False,0,0.96
+M04010,Z04,Whitefield,industrial,2.0,none,False,0,0.59
+M05001,Z05,Rajajinagar,residential,0.8,none,False,0,1.28
+M05002,Z05,Rajajinagar,residential,1.3,none,False,0,0.97
+M05003,Z05,Rajajinagar,residential,1.3,none,False,0,1.08
+M05004,Z05,Rajajinagar,residential,0.6,none,False,0,0.56
+M05005,Z05,Rajajinagar,residential,0.6,none,False,0,0.64
+M05006,Z05,Rajajinagar,residential,1.3,none,False,0,0.51
+M05007,Z05,Rajajinagar,residential,1.0,none,False,0,1.17
+M05008,Z05,Rajajinagar,residential,0.6,none,False,0,0.6
+M05009,Z05,Rajajinagar,residential,0.8,none,False,0,0.59
+M05010,Z05,Rajajinagar,residential,1.3,none,False,0,0.66
+M06001,Z06,HSR Layout,mixed,1.4,none,False,0,0.49
+M06002,Z06,HSR Layout,mixed,1.4,none,False,0,1.0
+M06003,Z06,HSR Layout,mixed,1.0,none,False,0,0.67
+M06004,Z06,HSR Layout,mixed,1.0,none,False,0,1.04
+M06005,Z06,HSR Layout,mixed,1.0,periodic_spike,True,1,0.6
+M06006,Z06,HSR Layout,mixed,1.4,none,False,0,1.4
+M06007,Z06,HSR Layout,mixed,1.0,none,False,0,0.51
+M06008,Z06,HSR Layout,mixed,1.0,none,False,0,0.49
+M06009,Z06,HSR Layout,mixed,1.4,none,False,0,0.66
+M06010,Z06,HSR Layout,mixed,0.7,none,False,0,0.8
+M07001,Z07,Malleshwaram,residential,0.8,none,False,0,0.66
+M07002,Z07,Malleshwaram,residential,0.6,none,False,0,1.03
+M07003,Z07,Malleshwaram,residential,1.0,none,False,0,0.59
+M07004,Z07,Malleshwaram,residential,1.3,none,False,0,0.67
+M07005,Z07,Malleshwaram,residential,1.0,none,False,0,1.0
+M07006,Z07,Malleshwaram,residential,0.6,none,False,0,0.78
+M07007,Z07,Malleshwaram,residential,0.8,none,False,0,1.23
+M07008,Z07,Malleshwaram,residential,0.6,none,False,0,1.2
+M07009,Z07,Malleshwaram,residential,0.8,none,False,0,0.62
+M07010,Z07,Malleshwaram,residential,0.8,zone_mismatch,True,1,0.54
+M08001,Z08,Electronic City,industrial,2.0,none,False,0,0.64
+M08002,Z08,Electronic City,industrial,1.0,none,False,0,0.53
+M08003,Z08,Electronic City,industrial,4.0,none,False,0,0.68
+M08004,Z08,Electronic City,industrial,2.0,none,False,0,0.74
+M08005,Z08,Electronic City,industrial,2.0,none,False,0,1.02
+M08006,Z08,Electronic City,industrial,1.0,none,False,0,1.24
+M08007,Z08,Electronic City,industrial,7.0,none,False,0,0.68
+M08008,Z08,Electronic City,industrial,1.0,none,False,0,0.53
+M08009,Z08,Electronic City,industrial,2.0,zone_mismatch,True,1,0.53
+M08010,Z08,Electronic City,industrial,2.0,none,False,0,0.88
