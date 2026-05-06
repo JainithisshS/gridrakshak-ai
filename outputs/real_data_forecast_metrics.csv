@@ -1,5 +1,5 @@
 zone_id,model_mape_pct,baseline_mape_pct,improvement_pct,cv_mape_mean,cv_mape_std,cv_folds,test_samples
-Z_A,45.65,53.15,7.5,25.0,18.51,"[np.float64(7.5), np.float64(54.38), np.float64(16.5), np.float64(38.57), np.float64(8.07)]",721
-Z_B,44.22,52.43,8.22,29.61,19.16,"[np.float64(7.23), np.float64(54.41), np.float64(35.64), np.float64(43.37), np.float64(7.38)]",721
-Z_C,44.19,53.35,9.16,23.22,17.8,"[np.float64(7.58), np.float64(54.52), np.float64(14.95), np.float64(31.0), np.float64(8.04)]",721
-Z_D,44.99,52.48,7.49,28.67,18.87,"[np.float64(6.95), np.float64(54.18), np.float64(42.94), np.float64(31.72), np.float64(7.56)]",721
+Z_A,45.67,53.23,7.56,26.56,17.62,"[np.float64(7.43), np.float64(54.53), np.float64(32.34), np.float64(30.7), np.float64(7.78)]",721
+Z_B,44.35,52.57,8.22,26.94,17.93,"[np.float64(7.12), np.float64(54.47), np.float64(29.31), np.float64(36.02), np.float64(7.76)]",721
+Z_C,44.02,53.36,9.34,25.81,17.41,"[np.float64(7.29), np.float64(54.37), np.float64(29.25), np.float64(30.34), np.float64(7.79)]",721
+Z_D,43.85,52.39,8.54,29.83,20.02,"[np.float64(7.36), np.float64(54.45), np.float64(49.48), np.float64(30.53), np.float64(7.34)]",721

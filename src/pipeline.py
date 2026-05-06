@@ -308,6 +308,31 @@ def main():
         real_alerts.to_csv(OUTPUTS_DIR / "real_data_alerts.csv",      index=False)
         real_flags.to_csv(OUTPUTS_DIR  / "real_data_meter_flags.csv", index=False)
 
+        # Enrich real zone_risk_table with anomaly tier upgrades
+        rzrt = _pd.read_csv(OUTPUTS_DIR / "real_data_zone_risk_table.csv")
+        real_alert_summary = (
+            real_alerts.groupby("zone_name")
+            .agg(
+                fraud_meter_count=("alert_tier", lambda x: (x == "High").sum()),
+                medium_alert_count=("alert_tier", lambda x: (x == "Medium").sum()),
+                avg_risk_score=("risk_score", "mean"),
+                max_risk_score=("risk_score", "max"),
+            )
+            .reset_index()
+        )
+        rzrt = rzrt.merge(real_alert_summary, on="zone_name", how="left")
+        rzrt["fraud_meter_count"]  = rzrt["fraud_meter_count"].fillna(0).astype(int)
+        rzrt["medium_alert_count"] = rzrt["medium_alert_count"].fillna(0).astype(int)
+        rzrt["avg_risk_score"]     = rzrt["avg_risk_score"].fillna(0).round(3)
+        rzrt["max_risk_score"]     = rzrt["max_risk_score"].fillna(0).round(3)
+        rzrt["risk_tier"] = rzrt.apply(
+            lambda r: "High"   if r["fraud_meter_count"] >= 1 or r["max_risk_score"] >= 0.70
+                      else ("Medium" if r["medium_alert_count"] >= 2 or r["max_risk_score"] >= 0.40
+                            else r["risk_tier"]),
+            axis=1
+        )
+        rzrt.to_csv(OUTPUTS_DIR / "real_data_zone_risk_table.csv", index=False)
+
         # Use optimal threshold — with 28 meters the peer comparison naturally
         # produces realistic score overlap. No artificial noise needed.
         real_an_metrics, real_pr_df = evaluate_anomaly_detection(
@@ -350,6 +375,41 @@ def main():
     for _, row in high.iterrows():
         print(f"    #{row['priority_rank']} {row['meter_id']} ({row['zone_name']}) - Score: {row['risk_score']:.3f}")
         print(f"       -> {row['reason_codes'][:100]}")
+
+    # ── Enrich zone_risk_table with anomaly alert data ───────────────────────
+    # A zone's risk tier should reflect BOTH load forecasts AND fraud alerts.
+    # Zones with ≥1 High-tier alert → High; ≥1 Medium-tier alert → Medium.
+    import pandas as _pd
+    zrt = _pd.read_csv(OUTPUTS_DIR / "zone_risk_table.csv")
+
+    zone_alert_summary = (
+        alerts_df.groupby("zone_name")
+        .agg(
+            fraud_meter_count=("alert_tier", lambda x: (x == "High").sum()),
+            medium_alert_count=("alert_tier", lambda x: (x == "Medium").sum()),
+            avg_risk_score=("risk_score", "mean"),
+            max_risk_score=("risk_score", "max"),
+        )
+        .reset_index()
+    )
+
+    zrt = zrt.merge(zone_alert_summary, on="zone_name", how="left")
+    zrt["fraud_meter_count"]  = zrt["fraud_meter_count"].fillna(0).astype(int)
+    zrt["medium_alert_count"] = zrt["medium_alert_count"].fillna(0).astype(int)
+    zrt["avg_risk_score"]     = zrt["avg_risk_score"].fillna(0).round(3)
+    zrt["max_risk_score"]     = zrt["max_risk_score"].fillna(0).round(3)
+
+    # Upgrade risk tier based on anomaly evidence
+    def _upgrade_tier(row):
+        if row["fraud_meter_count"] >= 1 or row["max_risk_score"] >= 0.70:
+            return "High"
+        elif row["medium_alert_count"] >= 2 or row["max_risk_score"] >= 0.40:
+            return "Medium"
+        return row["risk_tier"]
+
+    zrt["risk_tier"] = zrt.apply(_upgrade_tier, axis=1)
+    zrt.to_csv(OUTPUTS_DIR / "zone_risk_table.csv", index=False)
+    print(f"\n  Zone risk tiers: { {t: (zrt['risk_tier']==t).sum() for t in ['High','Medium','Low']} }")
 
     # ── Step 5: Zone Affinity Check ───────────────────────────────────────────
     banner("STEP 5 - Zone Affinity Verification")
