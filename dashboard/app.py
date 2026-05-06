@@ -18,8 +18,8 @@ DATA_RAW = ROOT / "data" / "raw"
 SHAP_DIR = OUTPUTS / "shap_plots"
 
 st.set_page_config(
-    page_title="GridRakshak AI — BESCOM Smart Meter Intelligence",
-    page_icon="⚡",
+    page_title="GridRakshak AI",
+    page_icon="G",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -27,53 +27,202 @@ st.set_page_config(
 # ── Custom CSS ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+* { font-family: 'Poppins', sans-serif; }
 
-.main { background: #0a0e1a; }
-[data-testid="stSidebar"] { background: #0f1525; border-right: 1px solid #1e2a45; }
-[data-testid="stSidebar"] * { color: #c8d6f0 !important; }
+html, body, [class*="css"] { 
+    font-family: 'Poppins', sans-serif;
+    background: #0d1117;
+    color: #e5e7eb;
+}
 
+.main { background: #0d1117; }
+[data-testid="stSidebar"] { 
+    background: #161b22; 
+    border-right: 1px solid #30363d; 
+}
+[data-testid="stSidebar"] * { color: #d0d6dc !important; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 { 
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+}
+
+/* Metric Cards */
 .metric-card {
-    background: linear-gradient(135deg, #1a2540 0%, #0f1e38 100%);
-    border: 1px solid #2a3a60;
-    border-radius: 12px;
-    padding: 20px 24px;
+    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 24px;
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease;
 }
-.metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,120,255,0.15); }
-.metric-value { font-size: 2.2rem; font-weight: 700; color: #60a5fa; margin: 4px 0; }
-.metric-label { font-size: 0.85rem; color: #8899bb; text-transform: uppercase; letter-spacing: 0.05em; }
-.metric-delta { font-size: 0.8rem; margin-top: 4px; }
+.metric-card:hover { 
+    transform: translateY(-2px); 
+    border-color: #58a6ff;
+    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.08);
+}
+.metric-value { 
+    font-size: 2.4rem; 
+    font-weight: 800; 
+    color: #58a6ff; 
+    margin: 8px 0 4px 0;
+    letter-spacing: -0.5px;
+}
+.metric-label { 
+    font-size: 0.8rem; 
+    color: #8b949e; 
+    text-transform: uppercase; 
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+.metric-delta { 
+    font-size: 0.75rem; 
+    margin-top: 6px; 
+    color: #8b949e;
+    font-weight: 500;
+}
 
-.risk-high { color: #ef4444 !important; font-weight: 700; }
-.risk-medium { color: #f59e0b !important; font-weight: 700; }
-.risk-low { color: #22c55e !important; font-weight: 700; }
+/* Status Colors - Monochrome */
+.risk-high { color: #dc3545 !important; font-weight: 700; }
+.risk-medium { color: #6f42c1 !important; font-weight: 700; }
+.risk-low { color: #198754 !important; font-weight: 700; }
 
+/* Alert Cards */
 .alert-card {
-    background: #141e35;
-    border-left: 4px solid #ef4444;
+    background: #161b22;
+    border-left: 3px solid #58a6ff;
     border-radius: 8px;
-    padding: 14px 18px;
-    margin-bottom: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
 }
-.alert-card.medium { border-left-color: #f59e0b; }
-.alert-card.low { border-left-color: #22c55e; }
-.alert-meter { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; }
-.alert-reason { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+.alert-card:hover { 
+    border-left-color: #79c0ff;
+    background: #1c2128;
+}
+.alert-card.medium { border-left-color: #6f42c1; }
+.alert-card.low { border-left-color: #198754; }
+.alert-meter { 
+    font-size: 1rem; 
+    font-weight: 700; 
+    color: #d0d6dc;
+    letter-spacing: -0.3px;
+}
+.alert-reason { 
+    font-size: 0.8rem; 
+    color: #8b949e; 
+    margin-top: 6px; 
+    font-weight: 500;
+}
 
+/* Section Headers */
 .section-header {
-    font-size: 1.4rem; font-weight: 700; color: #e2e8f0;
-    border-bottom: 2px solid #2a3a60;
-    padding-bottom: 8px; margin-bottom: 20px;
+    font-size: 1.3rem; 
+    font-weight: 800; 
+    color: #e5e7eb;
+    border-bottom: 2px solid #30363d;
+    padding-bottom: 12px; 
+    margin-bottom: 24px;
+    letter-spacing: -0.4px;
 }
 
-[data-testid="stDataFrame"] { background: #141e35; border-radius: 10px; }
-.stTabs [data-baseweb="tab-list"] { background: #0f1525; border-radius: 10px; gap: 4px; }
-.stTabs [data-baseweb="tab"] { background: #1a2540; border-radius: 8px; color: #94a3b8; }
-.stTabs [aria-selected="true"] { background: #2563eb; color: white !important; }
+/* Tables */
+[data-testid="stDataFrame"] { 
+    background: #0d1117 !important;
+    border-radius: 8px; 
+    border: 1px solid #30363d;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] { 
+    background: transparent;
+    border-bottom: 2px solid #30363d;
+    gap: 8px;
+}
+.stTabs [data-baseweb="tab"] { 
+    background: transparent;
+    color: #8b949e;
+    border-radius: 6px 6px 0 0;
+    font-weight: 600;
+    border: none;
+    padding: 12px 20px !important;
+}
+.stTabs [aria-selected="true"] { 
+    background: transparent;
+    color: #58a6ff !important; 
+    border-bottom: 3px solid #58a6ff;
+    font-weight: 700;
+}
+
+/* Buttons */
+.stButton > button {
+    background: #238636 !important;
+    color: white !important;
+    border: none !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    padding: 12px 24px !important;
+    transition: all 0.2s ease !important;
+}
+.stButton > button:hover {
+    background: #2ea043 !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Inputs */
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input,
+.stSelectbox > div > div > select {
+    background: #0d1117 !important;
+    border: 1px solid #30363d !important;
+    color: #e5e7eb !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
+
+.stSelectbox > div > div > select option {
+    background: #161b22 !important;
+    color: #e5e7eb !important;
+}
+
+/* Info/Warning/Error boxes */
+.stInfo, [data-testid="stInformationBox"] {
+    background: #0d2d1a !important;
+    border-left: 4px solid #198754 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+}
+
+.stWarning {
+    background: #2d2b0d !important;
+    border-left: 4px solid #6f42c1 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+}
+
+.stError {
+    background: #2d0d0d !important;
+    border-left: 4px solid #dc3545 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+}
+
+.stSuccess {
+    background: #0d2d1a !important;
+    border-left: 4px solid #198754 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+}
+
+/* Selectbox/Multiselect */
+.stMultiSelect > div > div {
+    background: #0d1117 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 6px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -145,73 +294,68 @@ def check_outputs():
 
 # ── Sidebar ─────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚡ GridRakshak AI")
-    st.markdown("*BESCOM Smart Meter Intelligence*")
+    st.markdown("### GridRakshak AI")
+    st.markdown("Smart Meter Intelligence System", help="BESCOM Decision Support Platform")
     st.divider()
 
     # ── Dataset selector ────────────────────────────────────────────────────
-    st.markdown("**📂 Dataset**")
+    st.markdown("**Data Selection**")
     dataset_choice = st.radio(
-        "Select dataset to explore:",
-        options=["🏙️ Synthetic BESCOM", "🏠 Real UCI Household"],
+        "Dataset to analyze:",
+        options=["Synthetic BESCOM", "Real UCI Household"],
         index=0, label_visibility="collapsed",
     )
-    IS_REAL = dataset_choice == "🏠 Real UCI Household"
+    IS_REAL = dataset_choice == "Real UCI Household"
     PREFIX  = "real_data_" if IS_REAL else ""
 
     st.divider()
     st.markdown("**System Status**")
     if check_outputs():
-        st.success("✅ Pipeline outputs ready")
+        st.success("Pipeline outputs ready")
         if IS_REAL and not (OUTPUTS / "real_data_zone_risk_table.csv").exists():
-            st.warning("⚠️ Real data outputs missing. Re-run pipeline.")
+            st.warning("Real data outputs missing. Re-run pipeline.")
     else:
-        st.error("❌ Run `python src/pipeline.py` first")
+        st.error("Run pipeline first")
 
     st.divider()
-    if st.button("🔄 Refresh Data", use_container_width=True):
+    if st.button("Refresh Data", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
     st.divider()
     st.markdown("**About**")
     st.markdown("""
-GridRakshak AI converts smart meter data
-into predictive, actionable intelligence.
+**GridRakshak AI** provides intelligent analysis of smart meter data:
 
-- 🔮 24h demand forecasting
-- 🚨 Theft & anomaly detection
-- 🗺️ Zone affinity verification
-- 🤖 SHAP explainability
+- 24h demand forecasting
+- Theft & anomaly detection
+- Zone affinity analysis
+- Explainable AI insights
 """)
     st.divider()
-    st.caption("Powered by LightGBM · SHAP · DTW")
-    st.caption("Version 2.0 · BESCOM Pilot")
+    st.caption("Built with LightGBM, SHAP, DTW")
+    st.caption("BESCOM Pilot - v2.0")
 
 
 # ── Main Content ─────────────────────────────────────────────────────────────────
-st.markdown("# ⚡ GridRakshak AI")
-st.markdown("### Predictive Smart Meter Intelligence — BESCOM Decision Support")
+st.markdown("# GridRakshak AI")
+st.markdown("Intelligent smart meter analytics for demand forecasting and anomaly detection")
 
 if not check_outputs():
-    st.warning("⚠️ No output data found. Please run the pipeline first:")
+    st.warning("No output data found. Run the pipeline first:")
     st.code("python src/pipeline.py", language="bash")
     st.stop()
 
-# ── Dataset context banner ────────────────────────────────────────────────────
+# ── Dataset context banner ────────────────────────────────────────────────
 if IS_REAL:
     st.info(
-        "🏠 **Real UCI Household Dataset** — UCI Individual Household Electric Power Consumption "
+        "**Real UCI Household Dataset** — Individual household electric power consumption "
         "(2006–2010, 2M rows, 1-min intervals). Fraud patterns injected into real baseline for "
-        "ground-truth validation. This demonstrates the system works on **real-world data**, "
-        "not just synthetic patterns.",
-        icon="🔬",
+        "ground-truth validation."
     )
 else:
     st.info(
-        "🏙️ **Synthetic BESCOM Dataset** — 8 real Bangalore zones (Jayanagar, Koramangala, "
-        "Whitefield…), 80 meters, 90 days, 691K readings. Includes area-type profiles, "
-        "temperature-driven AC load, festival boosts (Diwali, New Year), and 12 fraud meters.",
-        icon="📊",
+        "**Synthetic BESCOM Dataset** — 8 real Bangalore zones, 80 meters, 90 days, 691K readings. "
+        "Includes area-type profiles, temperature-driven AC load, festival boosts, and 12 fraud meters."
     )
 
 # ── Dynamic data loading based on dataset choice ─────────────────────────────
@@ -253,7 +397,7 @@ if alerts is not None and "alert_tier" not in alerts.columns and "risk_tier" in 
 # ── KPI Row ───────────────────────────────────────────────────────────────────
 col1, col2, col3, col4, col5 = st.columns(5)
 
-def kpi(col, value, label, delta=None, color="#60a5fa"):
+def kpi(col, value, label, delta=None, color="#58a6ff"):
     with col:
         delta_html = f'<div class="metric-delta" style="color:{color}">{delta}</div>' if delta else ""
         st.markdown(f"""
@@ -271,21 +415,21 @@ med_alerts = int((alerts["alert_tier"] == "Medium").sum()) if alerts is not None
 avg_mape = f"{fc_metrics['model_mape_pct'].mean():.1f}%" if fc_metrics is not None else "N/A"
 prec = f"{int(an_metrics['precision'].iloc[0]*100)}%" if an_metrics is not None else "N/A"
 
-kpi(col1, high_zones, "High Risk Zones", "⚠️ Requires Action", "#ef4444")
-kpi(col2, high_alerts, "High Priority Alerts", "🔴 Inspect Immediately", "#f59e0b")
-kpi(col3, med_alerts, "Medium Priority", "🟡 Monitor Closely", "#f59e0b")
-kpi(col4, avg_mape, "Avg Forecast MAPE", "vs historical baseline", "#22c55e")
-kpi(col5, prec, "Detection Precision", "anomaly detection", "#60a5fa")
+kpi(col1, high_zones, "High Risk Zones", "Action Required", "#dc3545")
+kpi(col2, high_alerts, "High Priority Alerts", "Immediate Inspection", "#6f42c1")
+kpi(col3, med_alerts, "Medium Priority", "Monitor Closely", "#6f42c1")
+kpi(col4, avg_mape, "Avg Forecast MAPE", "vs baseline", "#198754")
+kpi(col5, prec, "Detection Precision", "anomaly accuracy", "#58a6ff")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🗺️ Zone Risk Map",
-    "🚨 Inspection Alerts",
-    "📊 Meter Drilldown",
-    "📈 Model Performance",
-    "💰 Economic Impact",
+    "Zone Risk Map",
+    "Inspection Alerts",
+    "Meter Drilldown",
+    "Model Performance",
+    "Economic Impact",
 ])
 
 
@@ -293,14 +437,14 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # TAB 1 — Zone Risk Map
 # ════════════════════════════════════════════════════════════════════
 with tab1:
-    st.markdown('<div class="section-header">24-Hour Zone Risk Assessment</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Zone Risk Assessment</div>', unsafe_allow_html=True)
 
     if zone_risk is not None:
         c1, c2 = st.columns([1, 1])
 
         with c1:
             # Risk tier bar chart
-            color_map = {"High": "#ef4444", "Medium": "#f59e0b", "Low": "#22c55e"}
+            color_map = {"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"}
             fig = px.bar(
                 zone_risk,
                 x="zone_name", y="capacity_usage_pct",
@@ -311,14 +455,14 @@ with tab1:
                 title="Zone Capacity Usage & Risk Tier",
             )
             fig.update_traces(textposition="outside", textfont_size=13)
-            fig.add_hline(y=85, line_dash="dash", line_color="#ef4444",
+            fig.add_hline(y=85, line_dash="dash", line_color="#dc3545",
                          annotation_text="High Risk Threshold (85%)")
             fig.update_layout(
-                paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-                font_color="#c8d6f0", title_font_size=16,
-                xaxis=dict(gridcolor="#1e2a45"),
-                yaxis=dict(gridcolor="#1e2a45"),
-                legend=dict(bgcolor="#1a2540"),
+                paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+                font_color="#d0d6dc", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d0d6dc"),
+                xaxis=dict(gridcolor="#30363d"),
+                yaxis=dict(gridcolor="#30363d"),
+                legend=dict(bgcolor="#161b22"),
                 margin=dict(t=60, b=20),
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -334,56 +478,56 @@ with tab1:
                 title="Demand Exceedance Probability",
             )
             fig2.update_layout(
-                paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-                font_color="#c8d6f0", title_font_size=16,
-                xaxis=dict(gridcolor="#1e2a45"),
-                yaxis=dict(gridcolor="#1e2a45"),
-                legend=dict(bgcolor="#1a2540"),
+                paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+                font_color="#d0d6dc", title_font_size=16, title_font=dict(family="Poppins", size=16, color="#d0d6dc"),
+                xaxis=dict(gridcolor="#30363d"),
+                yaxis=dict(gridcolor="#30363d"),
+                legend=dict(bgcolor="#161b22"),
                 margin=dict(t=60, b=20),
             )
             st.plotly_chart(fig2, use_container_width=True)
 
-        st.markdown("#### Zone Risk Summary Table")
+        st.markdown("**Risk Summary Table**")
         display_cols = ["zone_name", "risk_tier", "peak_forecast_kwh", "capacity_kw",
                         "capacity_usage_pct", "exceedance_rate_pct", "model_mape_pct"]
 
         def color_risk(val):
-            colors = {"High": "color: #ef4444; font-weight: bold",
-                      "Medium": "color: #f59e0b; font-weight: bold",
-                      "Low": "color: #22c55e; font-weight: bold"}
+            colors = {"High": "color: #dc3545; font-weight: 700",
+                      "Medium": "color: #6f42c1; font-weight: 700",
+                      "Low": "color: #198754; font-weight: 700"}
             return colors.get(val, "")
 
-        styled = zone_risk[display_cols].style.map(color_risk, subset=["risk_tier"])
+        styled = zone_risk[display_cols].style.applymap(color_risk, subset=["risk_tier"])
         st.dataframe(styled, use_container_width=True, hide_index=True)
 
     # Zone forecast chart
     if forecasts is not None:
-        st.markdown("#### 24-Hour Demand Forecast by Zone")
+        st.markdown("**Forecast by Zone**")
         selected_zone = st.selectbox("Select Zone", forecasts["zone_id"].unique(), key="zone_sel")
         z_fc = forecasts[forecasts["zone_id"] == selected_zone].sort_values("timestamp")
 
         fig3 = go.Figure()
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["actual_kwh"],
-            name="Actual", line=dict(color="#60a5fa", width=2),
+            name="Actual", line=dict(color="#58a6ff", width=2.5),
         ))
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["forecast_kwh"],
-            name="Forecast (P50)", line=dict(color="#f59e0b", width=2, dash="dash"),
+            name="Forecast (P50)", line=dict(color="#79c0ff", width=2, dash="dash"),
         ))
         fig3.add_trace(go.Scatter(
             x=z_fc["timestamp"], y=z_fc["forecast_p90_kwh"],
-            name="Forecast (P90)", line=dict(color="#ef4444", width=1, dash="dot"),
+            name="Forecast (P90)", line=dict(color="#a5d6ff", width=1.5, dash="dot"),
         ))
         cap = z_fc["capacity_kw"].iloc[0]
-        fig3.add_hline(y=cap, line_dash="dash", line_color="#ef4444",
+        fig3.add_hline(y=cap, line_dash="dash", line_color="#dc3545",
                       annotation_text=f"Capacity: {cap} kW")
         fig3.update_layout(
-            paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-            font_color="#c8d6f0",
-            xaxis=dict(gridcolor="#1e2a45", title="Time"),
-            yaxis=dict(gridcolor="#1e2a45", title="kWh"),
-            legend=dict(bgcolor="#1a2540"),
+            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+            xaxis=dict(gridcolor="#30363d", title="Time"),
+            yaxis=dict(gridcolor="#30363d", title="kWh"),
+            legend=dict(bgcolor="#161b22"),
             margin=dict(t=20, b=20),
         )
         st.plotly_chart(fig3, use_container_width=True)
@@ -405,41 +549,42 @@ with tab2:
         filtered = alerts[alerts["alert_tier"].isin(tier_filter)]
 
         # Alert cards for top 10
-        st.markdown(f"**Showing {len(filtered)} alerts** (top 10 displayed as cards below)")
+        st.markdown(f"**Showing {len(filtered)} alerts** (top 10 displayed)")
         for _, row in filtered.head(10).iterrows():
             tier = str(row["alert_tier"]).lower()
-            tier_emoji = {"high": "🔴", "medium": "🟡", "low": "🟢"}.get(tier, "⚪")
+            tier_color = {"high": "#dc3545", "medium": "#6f42c1", "low": "#198754"}.get(tier, "#58a6ff")
             sigs = int(row.get("signals_triggered", 0))
             sig_label = {0: "", 1: "1-signal", 2: "2-signal confirmed", 3: "3-signal confirmed"}.get(sigs, "3-signal confirmed")
             st.markdown(f"""
             <div class="alert-card {tier}">
-                <div class="alert-meter">
-                    {tier_emoji} #{row['priority_rank']} — Meter {row['meter_id']} | {row.get('zone_name','N/A')}
-                    &nbsp;&nbsp;<span style="color:#94a3b8;font-size:0.85rem">Risk: {row['risk_score']:.3f} | {sig_label}</span>
+                <div class="alert-meter" style="color: {tier_color};">
+                    Priority #{int(row['priority_rank'])} — Meter {row['meter_id']} | {row.get('zone_name','N/A')}
+                    &nbsp;&nbsp;<span style="color:#8b949e;font-size:0.85rem">Risk: {row['risk_score']:.3f} | {sig_label}</span>
                 </div>
-                <div style="display:flex;gap:16px;margin:6px 0;font-size:0.8rem;color:#64748b">
-                    <span>L1 Stat: <b style='color:#60a5fa'>{row.get('l1_score',0):.2f}</b></span>
-                    <span>L2 IF: <b style='color:#f59e0b'>{row.get('if_score',0):.2f}</b></span>
-                    <span>L3 Peer: <b style='color:#a78bfa'>{row.get('peer_score',0):.2f}</b></span>
+                <div style="display:flex;gap:16px;margin:8px 0;font-size:0.8rem;color:#8b949e">
+                    <span>L1 Stat: <b style='color:#58a6ff'>{row.get('l1_score',0):.2f}</b></span>
+                    <span>L2 IF: <b style='color:#79c0ff'>{row.get('if_score',0):.2f}</b></span>
+                    <span>L3 Peer: <b style='color:#a5d6ff'>{row.get('peer_score',0):.2f}</b></span>
                 </div>
-                <div class="alert-reason">⚠️ {row['reason_codes']}</div>
+                <div class="alert-reason">{row['reason_codes']}</div>
             </div>
             """, unsafe_allow_html=True)
 
-        st.markdown("#### Full Alert Table")
+        st.markdown("**Complete Alert Table**")
         st.dataframe(filtered, use_container_width=True, hide_index=True)
 
         # Risk score distribution
         fig4 = px.histogram(
             alerts, x="risk_score", color="alert_tier",
-            color_discrete_map={"High": "#ef4444", "Medium": "#f59e0b", "Low": "#22c55e"},
+            color_discrete_map={"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"},
             nbins=30, title="Risk Score Distribution",
             labels={"risk_score": "Composite Risk Score", "count": "Number of Meters"},
         )
         fig4.update_layout(
-            paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-            font_color="#c8d6f0", xaxis=dict(gridcolor="#1e2a45"),
-            yaxis=dict(gridcolor="#1e2a45"), legend=dict(bgcolor="#1a2540"),
+            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+            xaxis=dict(gridcolor="#30363d"),
+            yaxis=dict(gridcolor="#30363d"), legend=dict(bgcolor="#161b22"),
         )
         st.plotly_chart(fig4, use_container_width=True)
 
@@ -447,7 +592,7 @@ with tab2:
         if affinity is not None:
             mismatched = affinity[affinity["zone_mismatch_flag"] == 1]
             if len(mismatched) > 0:
-                st.markdown("#### 🔀 Zone Affinity — Potential Mis-Tagged Meters")
+                st.markdown("**Zone Affinity - Potential Mis-Tagged Meters**")
                 st.info(f"**{len(mismatched)} meters** have load shapes inconsistent with their declared zone/feeder.")
                 st.dataframe(mismatched, use_container_width=True, hide_index=True)
 
@@ -474,13 +619,13 @@ with tab3:
                 c1.metric("Zone", row["zone_name"])
                 c2.metric("Base Scale", f"{row['base_scale']:.2f}x")
                 c3.metric("Fraud Type", row["fraud_type"])
-                c4.metric("Ground Truth", "🔴 Fraud" if row["is_fraud"] else "🟢 Normal")
+                c4.metric("Ground Truth", "Fraud" if row["is_fraud"] else "Normal")
 
         # Reading chart with anomaly overlay
         fig5 = go.Figure()
         fig5.add_trace(go.Scatter(
             x=m_readings["timestamp"], y=m_readings["kwh"],
-            name="kWh Reading", line=dict(color="#60a5fa", width=1.5),
+            name="kWh Reading", line=dict(color="#58a6ff", width=2),
             mode="lines",
         ))
 
@@ -490,16 +635,16 @@ with tab3:
                 fig5.add_trace(go.Scatter(
                     x=anomalies["timestamp"], y=anomalies["kwh"],
                     mode="markers", name="Anomaly Flagged",
-                    marker=dict(color="#ef4444", size=5, symbol="circle"),
+                    marker=dict(color="#dc3545", size=6, symbol="circle"),
                 ))
 
         fig5.update_layout(
-            title=f"Meter {sel_meter} — Consumption History (90 days)",
-            paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-            font_color="#c8d6f0",
-            xaxis=dict(gridcolor="#1e2a45", title="Date"),
-            yaxis=dict(gridcolor="#1e2a45", title="kWh (15-min)"),
-            legend=dict(bgcolor="#1a2540"),
+            title=f"Meter {sel_meter} — Consumption History",
+            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+            xaxis=dict(gridcolor="#30363d", title="Date"),
+            yaxis=dict(gridcolor="#30363d", title="kWh (15-min)"),
+            legend=dict(bgcolor="#161b22"),
         )
         st.plotly_chart(fig5, use_container_width=True)
 
@@ -511,12 +656,12 @@ with tab3:
         fig6 = px.bar(daily, x="date", y="kwh",
                      title=f"Daily Consumption — {sel_meter}",
                      labels={"kwh": "Daily kWh", "date": "Date"},
-                     color_discrete_sequence=["#3b82f6"])
+                     color_discrete_sequence=["#58a6ff"])
         fig6.update_layout(
-            paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-            font_color="#c8d6f0",
-            xaxis=dict(gridcolor="#1e2a45"),
-            yaxis=dict(gridcolor="#1e2a45"),
+            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+            xaxis=dict(gridcolor="#30363d"),
+            yaxis=dict(gridcolor="#30363d"),
         )
         st.plotly_chart(fig6, use_container_width=True)
 
@@ -525,13 +670,13 @@ with tab3:
             m_alert = alerts[alerts["meter_id"] == sel_meter]
             if len(m_alert) > 0:
                 row = m_alert.iloc[0]
-                tier_color = {"High": "#ef4444", "Medium": "#f59e0b", "Low": "#22c55e"}.get(str(row["alert_tier"]), "#94a3b8")
+                tier_color = {"High": "#dc3545", "Medium": "#6f42c1", "Low": "#198754"}.get(str(row["alert_tier"]), "#8b949e")
                 st.markdown(f"""
-                <div style="background:#141e35;border-left:4px solid {tier_color};border-radius:8px;padding:16px;margin-top:10px">
+                <div style="background:#161b22;border-left:3px solid {tier_color};border-radius:8px;padding:18px 20px;margin-top:12px">
                     <b style="color:{tier_color}">Alert Tier: {row['alert_tier']}</b> &nbsp;|&nbsp;
                     Risk Score: <b>{row['risk_score']:.3f}</b> &nbsp;|&nbsp;
                     Priority Rank: <b>#{int(row['priority_rank'])}</b><br>
-                    <span style="color:#94a3b8;font-size:0.9rem">⚠️ {row['reason_codes']}</span>
+                    <span style="color:#8b949e;font-size:0.9rem">{row['reason_codes']}</span>
                 </div>
                 """, unsafe_allow_html=True)
             else:
@@ -547,29 +692,29 @@ with tab4:
     st.markdown('<div class="section-header">Model Evaluation & Validation</div>', unsafe_allow_html=True)
 
     if fc_metrics is not None:
-        st.markdown("#### Demand Forecasting — MAPE vs Baseline")
+        st.markdown("**Demand Forecasting — MAPE vs Baseline**")
         fig7 = go.Figure()
         fig7.add_trace(go.Bar(
             name="Model MAPE", x=fc_metrics["zone_id"],
-            y=fc_metrics["model_mape_pct"], marker_color="#3b82f6",
+            y=fc_metrics["model_mape_pct"], marker_color="#58a6ff",
         ))
         fig7.add_trace(go.Bar(
             name="Baseline MAPE", x=fc_metrics["zone_id"],
-            y=fc_metrics["baseline_mape_pct"], marker_color="#6b7280",
+            y=fc_metrics["baseline_mape_pct"], marker_color="#6e7681",
         ))
         fig7.update_layout(
             barmode="group",
-            paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-            font_color="#c8d6f0",
-            xaxis=dict(gridcolor="#1e2a45", title="Zone"),
-            yaxis=dict(gridcolor="#1e2a45", title="MAPE (%)"),
-            legend=dict(bgcolor="#1a2540"),
+            paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+            font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+            xaxis=dict(gridcolor="#30363d", title="Zone"),
+            yaxis=dict(gridcolor="#30363d", title="MAPE (%)"),
+            legend=dict(bgcolor="#161b22"),
         )
         st.plotly_chart(fig7, use_container_width=True)
         st.dataframe(fc_metrics, use_container_width=True, hide_index=True)
 
     if an_metrics is not None:
-        st.markdown("#### Anomaly Detection — Precision / Recall / F1")
+        st.markdown("**Anomaly Detection — Precision / Recall / F1**")
         row = an_metrics.iloc[0]
         c1, c2, c3, c4, c5 = st.columns(5)
         c1.metric("Precision", f"{float(row['precision']):.1%}")
@@ -584,12 +729,13 @@ with tab4:
             tp, fp, tn, fn = int(row["tp"]), int(row["fp"]), int(row["tn"]), int(row["fn"])
             cm_data = [[tn, fp], [fn, tp]]
             fig8 = px.imshow(
-                cm_data, text_auto=True, color_continuous_scale="Blues",
+                cm_data, text_auto=True, color_continuous_scale="Greys",
                 labels=dict(x="Predicted", y="Actual"),
                 x=["Normal", "Anomaly"], y=["Normal", "Anomaly"],
                 title="Confusion Matrix",
             )
-            fig8.update_layout(paper_bgcolor="#0f1525", font_color="#c8d6f0")
+            fig8.update_layout(paper_bgcolor="#0d1117", font_color="#d0d6dc",
+                             plot_bgcolor="#161b22")
             st.plotly_chart(fig8, use_container_width=True)
 
         with ch2:
@@ -599,7 +745,7 @@ with tab4:
                 fig_pr.add_trace(go.Scatter(
                     x=pr_curve["recall"], y=pr_curve["precision"],
                     mode="lines+markers", name="PR Curve",
-                    line=dict(color="#60a5fa", width=2),
+                    line=dict(color="#58a6ff", width=2.5),
                     marker=dict(size=4),
                     text=pr_curve["threshold"].round(2),
                     hovertemplate="Threshold: %{text}<br>Precision: %{y:.2f}<br>Recall: %{x:.2f}",
@@ -609,22 +755,22 @@ with tab4:
                 fig_pr.add_trace(go.Scatter(
                     x=[best["recall"]], y=[best["precision"]],
                     mode="markers", name=f"Optimal (t={best['threshold']:.2f})",
-                    marker=dict(color="#ef4444", size=12, symbol="star"),
+                    marker=dict(color="#dc3545", size=12, symbol="star"),
                 ))
                 fig_pr.update_layout(
                     title="Precision-Recall Curve",
-                    paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-                    font_color="#c8d6f0",
-                    xaxis=dict(title="Recall", gridcolor="#1e2a45", range=[0, 1.05]),
-                    yaxis=dict(title="Precision", gridcolor="#1e2a45", range=[0, 1.05]),
-                    legend=dict(bgcolor="#1a2540"),
+                    paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+                    font_color="#d0d6dc", title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+                    xaxis=dict(title="Recall", gridcolor="#30363d", range=[0, 1.05]),
+                    yaxis=dict(title="Precision", gridcolor="#30363d", range=[0, 1.05]),
+                    legend=dict(bgcolor="#161b22"),
                 )
                 st.plotly_chart(fig_pr, use_container_width=True)
 
     # SHAP plots
     shap_files = list(SHAP_DIR.glob("shap_*.png")) if SHAP_DIR.exists() else []
     if shap_files:
-        st.markdown("#### SHAP Feature Importance — Forecast Drivers")
+        st.markdown("**SHAP Feature Importance — Forecast Drivers**")
         cols = st.columns(min(len(shap_files), 3))
         for i, f in enumerate(shap_files[:3]):
             with cols[i % 3]:
@@ -634,10 +780,10 @@ with tab4:
 # TAB 5 — Economic Impact Calculator
 # ════════════════════════════════════════════════════════════════════
 with tab5:
-    st.markdown('<div class="section-header">💰 Economic Impact Calculator</div>', unsafe_allow_html=True)
-    st.markdown("Estimate the **revenue recovery potential** of deploying GridRakshak AI across BESCOM's network.")
+    st.markdown('<div class="section-header">Economic Impact Calculator</div>', unsafe_allow_html=True)
+    st.markdown("Estimate the **revenue recovery potential** of deploying GridRakshak AI across the network.")
 
-    st.markdown("#### Network Scale Parameters")
+    st.markdown("**Network Scale Parameters**")
     sc1, sc2, sc3 = st.columns(3)
     with sc1:
         total_meters = st.number_input("Total Smart Meters Deployed", min_value=1000, max_value=5000000,
@@ -649,7 +795,7 @@ with tab5:
                                         10, 100,
                                         int(float(an_metrics['precision'].iloc[0])*100) if an_metrics is not None else 46)
 
-    st.markdown("#### Consumption & Tariff Parameters")
+    st.markdown("**Consumption & Tariff Parameters**")
     tc1, tc2, tc3 = st.columns(3)
     with tc1:
         avg_monthly_kwh = st.number_input("Avg Monthly Consumption per Fraud Meter (kWh)",
@@ -678,7 +824,7 @@ with tab5:
     our_recovery    = recoverable_revenue / 1e7  # to crore
 
     st.markdown("---")
-    st.markdown("#### 📊 Projected Impact")
+    st.markdown("**Projected Impact**")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Fraud Meters Caught", f"{fraud_meters:,}",
               f"out of {flagged_meters:,} flagged")
@@ -697,49 +843,48 @@ with tab5:
         x=["Revenue Lost to Fraud", "Revenue Recovered", "Inspection Costs", "Net Gain"],
         y=[annual_revenue_lost/1e7, recoverable_revenue/1e7,
            -inspection_cost_total/1e7, 0],
-        connector=dict(line=dict(color="#2a3a60")),
-        increasing=dict(marker=dict(color="#22c55e")),
-        decreasing=dict(marker=dict(color="#ef4444")),
-        totals=dict(marker=dict(color="#60a5fa")),
+        connector=dict(line=dict(color="#30363d")),
+        increasing=dict(marker=dict(color="#198754")),
+        decreasing=dict(marker=dict(color="#dc3545")),
+        totals=dict(marker=dict(color="#58a6ff")),
     ))
     fig_wf.update_layout(
         title="Revenue Impact Waterfall (₹ Crore)",
-        paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-        font_color="#c8d6f0", showlegend=False,
-        yaxis=dict(title="₹ Crore", gridcolor="#1e2a45"),
+        paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+        font_color="#d0d6dc", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+        yaxis=dict(title="₹ Crore", gridcolor="#30363d"),
     )
     st.plotly_chart(fig_wf, use_container_width=True)
 
     # Scale comparison bar
-    st.markdown("#### BESCOM Context")
+    st.markdown("**Network Context**")
     ctx_data = pd.DataFrame({
-        "Category": ["BESCOM Annual Revenue", "Estimated AT&C Losses (8%)",
+        "Category": ["Annual Revenue", "Estimated AT&C Losses (8%)",
                      "GridRakshak Recovery Potential", "Net Gain after Inspection Cost"],
         "Amount (₹ Crore)": [bescom_revenue, atc_loss_crore,
                               round(our_recovery, 1), round(net_gain/1e7, 1)],
-        "Color": ["#3b82f6", "#ef4444", "#f59e0b", "#22c55e"],
+        "Color": ["#58a6ff", "#dc3545", "#f7b731", "#198754"],
     })
     fig_ctx = px.bar(ctx_data, x="Category", y="Amount (₹ Crore)",
                      color="Category", color_discrete_sequence=ctx_data["Color"].tolist(),
-                     title="GridRakshak Impact vs BESCOM Scale")
+                     title="GridRakshak Impact vs Network Scale")
     fig_ctx.update_layout(
-        paper_bgcolor="#0f1525", plot_bgcolor="#141e35",
-        font_color="#c8d6f0", showlegend=False,
-        xaxis=dict(gridcolor="#1e2a45"),
-        yaxis=dict(title="₹ Crore", gridcolor="#1e2a45"),
+        paper_bgcolor="#0d1117", plot_bgcolor="#161b22",
+        font_color="#d0d6dc", showlegend=False, title_font=dict(family="Poppins", size=14, color="#d0d6dc"),
+        xaxis=dict(gridcolor="#30363d"),
+        yaxis=dict(title="₹ Crore", gridcolor="#30363d"),
     )
     st.plotly_chart(fig_ctx, use_container_width=True)
 
     st.info("""
-    **Assumptions:** BESCOM serves ~2.8 million consumers, annual revenue ~₹12,000 Cr,
-    AT&C losses ~8%. Tariff blended across residential/commercial/industrial.
-    Recovery assumes confirmed fraud meters are fully remediated in the same year.
+    **Key Assumptions:** Network statistics based on typical utility parameters. Fraud detection accuracy 
+    from model performance metrics. Recovery assumes confirmed fraud meters are fully remediated in the same year.
     """)
 
 st.divider()
 st.markdown(
-    "<center><span style='color:#4a5568;font-size:0.8rem'>"
-    "GridRakshak AI · BESCOM Smart Meter Intelligence · Hackathon 2026"
+    "<center><span style='color:#6e7681;font-size:0.8rem'>"
+    "GridRakshak AI · Smart Meter Intelligence · 2026"
     "</span></center>",
     unsafe_allow_html=True,
 )
