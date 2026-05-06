@@ -115,10 +115,11 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
     for zone_id, target_mean in TARGET_MEANS.items():
         tmp = resample[["timestamp", "global_kwh"]].copy()
 
-        # Scale so zone mean matches BESCOM target + zone-specific noise (±5%)
+        # Scale so zone mean matches BESCOM target + zone-specific noise (±10%)
+        # Slightly higher noise makes normal meters more variable → realistic
         scale = target_mean / max(uci_mean, 0.01)
         rng_z = np.random.default_rng(abs(hash(zone_id)) % 10000)
-        noise = 1.0 + rng_z.normal(0, 0.05, len(tmp))
+        noise = 1.0 + rng_z.normal(0, 0.10, len(tmp))
 
         tmp["kwh"]      = (tmp["global_kwh"] * scale * noise).clip(lower=0)
         tmp["zone_id"]  = zone_id
@@ -179,26 +180,31 @@ def inject_fraud_into_real(
         n   = len(kwh)
 
         if ftype == "sudden_drop":
-            # 30-45 day sustained drop (40-55% reduction)
-            s = rng.integers(int(n * 0.20), int(n * 0.40))
-            e = min(s + int(n * 0.25), n)
-            kwh[s:e] *= rng.uniform(0.42, 0.56)
+            # Short drop window (15-20% of series) with partial recovery
+            # — makes it harder to distinguish from seasonal dip
+            s = rng.integers(int(n * 0.25), int(n * 0.45))
+            e = min(s + int(n * 0.15), n)   # shorter window than before
+            kwh[s:e] *= rng.uniform(0.50, 0.62)  # less deep drop
+            # Partial recovery in last 20% of drop window
+            rec_start = s + int((e - s) * 0.7)
+            kwh[rec_start:e] *= rng.uniform(1.2, 1.5)
 
         elif ftype == "under_reporting":
-            # Consistent 8-18% under-read (subtle, realistic meter bypass)
-            kwh *= rng.uniform(0.82, 0.92)
+            # Very subtle: only 5-10% below normal — blends with meter noise
+            # Real-world bypass is often this subtle before escalating
+            kwh *= rng.uniform(0.90, 0.95)
 
         elif ftype == "periodic_spike":
-            # Unauthorized equipment at 2-4 AM — capped at 3-4x (not 6x)
+            # Unauthorized equipment at 2-4 AM — 2.5-3.5x (more realistic)
             night_idx = [j for j, ts in enumerate(clone["timestamp"])
                          if pd.Timestamp(ts).hour in [2, 3, 4]]
-            count = max(1, len(night_idx) // 8)
+            count = max(1, len(night_idx) // 10)  # fewer spike events
             if night_idx:
                 chosen = rng.choice(night_idx, size=min(count, len(night_idx)), replace=False)
                 for idx in chosen:
-                    for d in range(min(4, n - idx)):
-                        kwh[idx + d] = min(kwh[idx + d] * rng.uniform(3.0, 4.0),
-                                           TARGET_MEANS.get(clone["zone_id"].iloc[0], 65) * 5)
+                    for d in range(min(3, n - idx)):
+                        kwh[idx + d] = min(kwh[idx + d] * rng.uniform(2.5, 3.5),
+                                           TARGET_MEANS.get(clone["zone_id"].iloc[0], 65) * 4)
 
         elif ftype == "zone_mismatch":
             # Use different zone's pattern (different daily shape)
