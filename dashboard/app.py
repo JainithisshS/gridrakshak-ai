@@ -523,7 +523,7 @@ with tab1:
                       "Low": "color: #198754; font-weight: 700"}
             return colors.get(val, "")
 
-        styled = zone_risk[display_cols].style.applymap(color_risk, subset=["risk_tier"])
+        styled = zone_risk[display_cols].style.map(color_risk, subset=["risk_tier"])
         st.dataframe(styled, use_container_width=True, hide_index=True)
 
     # Zone forecast chart

@@ -192,31 +192,27 @@ def inject_fraud_into_real(
         n   = len(kwh)
 
         if ftype == "sudden_drop":
-            # Short drop window (15-20% of series) with partial recovery
-            # — makes it harder to distinguish from seasonal dip
-            s = rng.integers(int(n * 0.25), int(n * 0.45))
-            e = min(s + int(n * 0.15), n)   # shorter window than before
-            kwh[s:e] *= rng.uniform(0.50, 0.62)  # less deep drop
-            # Partial recovery in last 20% of drop window
-            rec_start = s + int((e - s) * 0.7)
-            kwh[rec_start:e] *= rng.uniform(1.2, 1.5)
+            # Sustained drop: 40-55% reduction over 25-35% of the series
+            # — mimics meter bypass or illegal load shedding for a billing period
+            s = rng.integers(int(n * 0.20), int(n * 0.40))
+            e = min(s + int(n * 0.28), n)
+            kwh[s:e] *= rng.uniform(0.45, 0.58)
 
         elif ftype == "under_reporting":
-            # Very subtle: only 5-10% below normal — blends with meter noise
-            # Real-world bypass is often this subtle before escalating
-            kwh *= rng.uniform(0.90, 0.95)
+            # 18-28% below normal — clearly above ±10% noise, signals meter bypass
+            kwh *= rng.uniform(0.72, 0.82)
 
         elif ftype == "periodic_spike":
-            # Unauthorized equipment at 2-4 AM — 2.5-3.5x (more realistic)
+            # Unauthorized equipment at 1-4 AM — 3-5x on ~15% of nights
             night_idx = [j for j, ts in enumerate(clone["timestamp"])
-                         if pd.Timestamp(ts).hour in [2, 3, 4]]
-            count = max(1, len(night_idx) // 10)  # fewer spike events
+                         if pd.Timestamp(ts).hour in [1, 2, 3, 4]]
+            count = max(1, len(night_idx) // 7)   # ~15% of nights
             if night_idx:
                 chosen = rng.choice(night_idx, size=min(count, len(night_idx)), replace=False)
                 for idx in chosen:
-                    for d in range(min(3, n - idx)):
-                        kwh[idx + d] = min(kwh[idx + d] * rng.uniform(2.5, 3.5),
-                                           TARGET_MEANS.get(clone["zone_id"].iloc[0], 65) * 4)
+                    for d in range(min(4, n - idx)):
+                        kwh[idx + d] = min(kwh[idx + d] * rng.uniform(3.0, 5.0),
+                                           TARGET_MEANS.get(clone["zone_id"].iloc[0], 65) * 5)
 
         elif ftype == "zone_mismatch":
             # Use a meter from a different zone (different daily load shape)

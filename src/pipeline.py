@@ -111,19 +111,24 @@ def _run_real_anomaly(
 
     feat_df = pd.DataFrame(feat_rows)
 
-    # ── Within-zone relative scoring ─────────────────────────────────────────
-    # For each zone: rank each meter relative to its peers on anomaly features.
-    # A meter that is systematically lower / spikier / more autocorrelated
-    # than zone peers gets a higher fraud score.
+    # ── Hybrid scoring: zone-peer (60%) + global percentile (40%) ────────────
+    # Zone-peer alone struggles when all meters share the same UCI source pattern.
+    # Adding global percentile ranking lets strong fraud signals (25% under-report,
+    # 4x night spikes) stand out across ALL meters, not just 3 zone peers.
     score_rows = []
+    global_mean       = feat_df["mean_kwh"].mean()
+    global_night_mean = feat_df["night_ratio"].mean()
+    global_spike_mean = feat_df["spike_ratio"].mean()
+    global_low_mean   = feat_df["low_frac"].mean()
+    global_drop_mean  = feat_df["drop_ratio"].mean()
+
     for zone_id, zgrp in feat_df.groupby("zone_id"):
         if len(zgrp) < 2:
             for _, row in zgrp.iterrows():
                 score_rows.append({"meter_id": row["meter_id"], "zone_id": zone_id,
-                                   "zone_name": row["zone_name"], "raw_score": 0.5})
+                                   "zone_name": row["zone_name"], "raw_score": 0.0,
+                                   "l1_score": 0.0, "if_score": 0.0, "peer_score": 0.0})
             continue
-
-        zone_mean = zgrp["mean_kwh"].mean()
 
         for _, row in zgrp.iterrows():
             peers = zgrp[zgrp["meter_id"] != row["meter_id"]]
@@ -132,41 +137,40 @@ def _run_real_anomaly(
             peer_low_frac    = peers["low_frac"].mean()
             peer_spike_ratio = peers["spike_ratio"].mean()
             peer_drop_ratio  = peers["drop_ratio"].mean()
-            peer_ac96        = peers["ac96"].mean()
 
-            # Score components (all > 0 means meter is more anomalous than peer)
-            # Under-reporting / sudden drop → lower mean than peers
-            under_score = max(0, (peer_mean_kwh - row["mean_kwh"]) / max(peer_mean_kwh, 1))
+            # ── Zone-peer score components ────────────────────────────────────
+            z_under = max(0, (peer_mean_kwh - row["mean_kwh"]) / max(peer_mean_kwh, 1))
+            z_drop  = max(0, peer_drop_ratio - row["drop_ratio"])
+            z_spike = max(0, row["night_ratio"] - peer_night_ratio) \
+                    + max(0, row["spike_ratio"] - peer_spike_ratio)
+            z_low   = max(0, row["low_frac"] - peer_low_frac)
+            z_ac    = max(0, peers["ac96"].mean() - row["ac96"]) * 0.3
 
-            # Sudden drop → drop_ratio < peer's drop_ratio
-            drop_score  = max(0, peer_drop_ratio - row["drop_ratio"])
+            zone_score = (z_under * 0.35 + z_drop * 0.25 +
+                          z_spike * 0.20 + z_low  * 0.15 + z_ac * 0.05)
 
-            # Night spike → higher night ratio than peers
-            spike_score = max(0, row["night_ratio"]  - peer_night_ratio) \
-                        + max(0, row["spike_ratio"]  - peer_spike_ratio)
+            # ── Global percentile score components ────────────────────────────
+            # How anomalous is this meter vs the GLOBAL distribution?
+            g_under = max(0, (global_mean - row["mean_kwh"]) / max(global_mean, 1))
+            g_spike = max(0, row["night_ratio"] - global_night_mean) \
+                    + max(0, row["spike_ratio"] - global_spike_mean)
+            g_low   = max(0, row["low_frac"] - global_low_mean)
+            g_drop  = max(0, global_drop_mean - row["drop_ratio"])
 
-            # Low consumption flag
-            low_score   = max(0, row["low_frac"]     - peer_low_frac)
+            global_score = (g_under * 0.35 + g_drop * 0.25 +
+                            g_spike * 0.25 + g_low  * 0.15)
 
-            # Higher autocorr at lag-96 means more regular (less suspicious)
-            # Lower autocorr than peers means pattern disruption
-            ac_score    = max(0, peer_ac96            - row["ac96"]) * 0.3
+            # ── Combine: 60% zone-peer + 40% global ──────────────────────────
+            raw = 0.60 * zone_score + 0.40 * global_score
 
-            raw = (
-                under_score * 0.35
-                + drop_score  * 0.25
-                + spike_score * 0.20
-                + low_score   * 0.15
-                + ac_score    * 0.05
-            )
             score_rows.append({
-                "meter_id":  row["meter_id"],
-                "zone_id":   zone_id,
-                "zone_name": row["zone_name"],
-                "raw_score": float(raw),
-                "l1_score":  float(under_score),
-                "if_score":  float(spike_score),
-                "peer_score": float(drop_score),
+                "meter_id":   row["meter_id"],
+                "zone_id":    zone_id,
+                "zone_name":  row["zone_name"],
+                "raw_score":  float(raw),
+                "l1_score":   float(z_under),
+                "if_score":   float(z_spike),
+                "peer_score": float(g_under),
             })
 
     score_df = pd.DataFrame(score_rows)
@@ -178,13 +182,6 @@ def _run_real_anomaly(
     score_df["risk_score"] = ((score_df["raw_score"] - s_min) / rng).clip(0, 1)
 
     # Classify tiers
-    p75 = score_df["risk_score"].quantile(0.60)
-    p50 = score_df["risk_score"].quantile(0.30)
-    score_df["alert_tier"] = score_df["risk_score"].apply(
-        lambda s: "High" if s >= p75 else ("Medium" if s >= p50 else "Low")
-    )
-
-    # Classify tiers from normalised scores
     p75 = score_df["risk_score"].quantile(0.60)
     p50 = score_df["risk_score"].quantile(0.30)
     score_df["alert_tier"] = score_df["risk_score"].apply(
