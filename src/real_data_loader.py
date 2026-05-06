@@ -115,6 +115,13 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
     # without diluting fraud signals from shared UCI household patterns
     METERS_PER_ZONE = 3
 
+    # Fixed seeds per (zone, meter_index) — deterministic regardless of PYTHONHASHSEED
+    SEED_TABLE = {
+        ("Z_A", 0): 1001, ("Z_A", 1): 1002, ("Z_A", 2): 1003,
+        ("Z_B", 0): 2001, ("Z_B", 1): 2002, ("Z_B", 2): 2003,
+        ("Z_C", 0): 3001, ("Z_C", 1): 3002, ("Z_C", 2): 3003,
+        ("Z_D", 0): 4001, ("Z_D", 1): 4002, ("Z_D", 2): 4003,
+    }
     rows = []
     for zone_id, target_mean in TARGET_MEANS.items():
         tmp_base = resample[["timestamp", "global_kwh"]].copy()
@@ -122,7 +129,7 @@ def build_zone_format(df: pd.DataFrame, use_days: int = 150) -> tuple:
 
         for m_idx in range(METERS_PER_ZONE):
             tmp   = tmp_base.copy()
-            seed  = abs(hash(zone_id + str(m_idx))) % 100_000
+            seed  = SEED_TABLE.get((zone_id, m_idx), 9000 + m_idx)
             rng_z = np.random.default_rng(seed)
 
             # Each meter: unique scale ±15% + per-reading noise ±10%
@@ -252,7 +259,7 @@ def inject_fraud_into_real(
 
 def load_real_dataset(raw_dir: Path, use_days: int = 150) -> tuple:
     """Full pipeline: load → resample → scale → inject fraud."""
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(42)   # fixed seed for reproducible fraud injection
 
     df = download_uci(raw_dir)
     readings, zones, meters = build_zone_format(df, use_days=use_days)

@@ -1,5 +1,5 @@
 zone_id,zone_name,risk_tier,peak_forecast_kwh,capacity_kw,capacity_usage_pct,exceedance_rate_pct,model_mape_pct,baseline_mape_pct,fraud_meter_count,medium_alert_count,avg_risk_score,max_risk_score
-Z_B,Koramangala Feeder,High,7.5,450,0.2,0.0,44.35,52.57,2,2,0.255,0.527
-Z_D,Jayanagar Feeder,High,7.7,520,0.2,0.0,43.85,52.39,1,2,0.121,0.162
-Z_A,Indiranagar Feeder,High,7.6,500,0.1,0.0,45.67,53.23,2,0,0.259,0.611
-Z_C,Whitefield Feeder,High,7.9,600,0.1,0.0,44.02,53.36,2,0,0.309,1.0
+Z_A,Indiranagar Feeder,High,7.7,500,0.2,0.0,45.19,53.16,1,2,0.248,0.395
+Z_B,Koramangala Feeder,High,7.3,450,0.2,0.0,45.55,52.45,1,2,0.308,0.708
+Z_D,Jayanagar Feeder,High,7.6,520,0.2,0.0,44.6,52.41,2,0,0.251,0.425
+Z_C,Whitefield Feeder,High,7.8,600,0.1,0.0,45.75,53.14,3,0,0.409,1.0
